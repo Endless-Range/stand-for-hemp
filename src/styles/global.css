@@ -1,46 +1,55 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* Design System - CSS Variables for easy customization */
+/* Stand for Hemp - Brand Design System */
 @theme {
-  /* Color Palette - Neutral Base */
-  --color-neutral-50: #fafafa;
-  --color-neutral-100: #f5f5f5;
-  --color-neutral-200: #e5e5e5;
-  --color-neutral-300: #d4d4d4;
-  --color-neutral-400: #a3a3a3;
-  --color-neutral-500: #737373;
-  --color-neutral-600: #525252;
-  --color-neutral-700: #404040;
-  --color-neutral-800: #262626;
-  --color-neutral-900: #171717;
-  --color-neutral-950: #0a0a0a;
+  /* Brand Colors - Stand for Hemp */
+  --color-hemp-green: #4a6741;
+  --color-soft-cream: #faf8f3;
+  --color-sky-blue: #7ba3a0;
+  --color-earth-brown: #8b6f47;
+  --color-soil-dark: #2d3e2b;
+  --color-wheat-gold: #d4a574;
+  --color-warm-cream: #f5f1e8;
 
-  /* Primary Accent Color - Customize per project */
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
-  --color-primary-800: #1e40af;
-  --color-primary-900: #1e3a8a;
-  --color-primary-950: #172554;
+  /* Primary Color (Hemp Green variations) */
+  --color-primary-50: #f3f5f3;
+  --color-primary-100: #e6eae5;
+  --color-primary-200: #ccd5ca;
+  --color-primary-300: #a8b9a3;
+  --color-primary-400: #7a9474;
+  --color-primary-500: #4a6741;
+  --color-primary-600: #3c5334;
+  --color-primary-700: #2d3e2b;
+  --color-primary-800: #232f23;
+  --color-primary-900: #1a221a;
+  --color-primary-950: #0f140f;
 
-  /* Secondary Accent Color */
-  --color-secondary-50: #f0fdf4;
-  --color-secondary-100: #dcfce7;
-  --color-secondary-200: #bbf7d0;
-  --color-secondary-300: #86efac;
-  --color-secondary-400: #4ade80;
-  --color-secondary-500: #22c55e;
-  --color-secondary-600: #16a34a;
-  --color-secondary-700: #15803d;
-  --color-secondary-800: #166534;
-  --color-secondary-900: #14532d;
-  --color-secondary-950: #052e16;
+  /* Secondary Color (Sky Blue variations) */
+  --color-secondary-50: #f3f7f7;
+  --color-secondary-100: #e6efee;
+  --color-secondary-200: #cce0de;
+  --color-secondary-300: #a6c9c6;
+  --color-secondary-400: #7ba3a0;
+  --color-secondary-500: #628c89;
+  --color-secondary-600: #4f706e;
+  --color-secondary-700: #3f5958;
+  --color-secondary-800: #334746;
+  --color-secondary-900: #2a3a39;
+  --color-secondary-950: #182322;
+
+  /* Accent Color (Earth Brown variations) */
+  --color-accent-50: #f7f5f2;
+  --color-accent-100: #ede9e3;
+  --color-accent-200: #dbd3c7;
+  --color-accent-300: #c4b49f;
+  --color-accent-400: #a89178;
+  --color-accent-500: #8b6f47;
+  --color-accent-600: #6f5939;
+  --color-accent-700: #56442e;
+  --color-accent-800: #453628;
+  --color-accent-900: #362b21;
+  --color-accent-950: #1d1712;
 
   /* Spacing Scale */
   --spacing-xs: 0.5rem;
@@ -53,7 +62,7 @@
   --spacing-4xl: 6rem;
 
   /* Typography Scale */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
@@ -75,6 +84,19 @@
   max-width: var(--container-max-width);
 }
 
+/* Custom max-width utilities */
+.max-w-content {
+  max-width: 42rem; /* 672px - for readable content width */
+}
+
+.max-w-reading {
+  max-width: 50rem; /* 800px - for longer reading content */
+}
+
+.max-w-form {
+  max-width: 36rem; /* 576px - for forms */
+}
+
 /* Base Styles */
 * {
   @apply border-neutral-200;
@@ -85,6 +107,72 @@ html {
 }
 
 body {
-  @apply bg-white text-neutral-900 antialiased;
+  @apply antialiased;
   font-family: var(--font-sans);
+  background-color: var(--color-soft-cream);
+  color: var(--color-soil-dark);
+  line-height: 1.6;
+  font-size: 18px; /* Base font size - ensures all text is readable */
+}
+
+/* Stand for Hemp Custom Utility Classes */
+.btn-primary {
+  @apply px-11 py-4 rounded-lg font-semibold text-white transition-all duration-300;
+  background-color: var(--color-hemp-green);
+  font-size: 1.2em;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-soil-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.btn-secondary {
+  @apply px-11 py-4 rounded-lg font-semibold text-white transition-all duration-300;
+  background-color: var(--color-earth-brown);
+  font-size: 1.2em;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent-700);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.card {
+  @apply bg-white rounded-xl p-8 shadow-md;
+}
+
+.stat-card {
+  @apply rounded-xl p-8 border-l-4;
+  background-color: var(--color-warm-cream);
+  border-left-color: var(--color-sky-blue);
+}
+
+.urgency-badge {
+  @apply inline-block px-8 py-4 rounded-xl font-bold;
+  background-color: var(--color-warm-cream);
+  color: var(--color-soil-dark);
+  font-size: 1.2em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  line-height: 1.4;
+  text-align: center;
+}
+
+.urgency-label {
+  display: block;
+  font-size: 0.9em; /* 16.2px with 18px base */
+  margin-bottom: 0.25rem;
+  opacity: 0.9;
+}
+
+.countdown-timer {
+  display: block;
+  font-size: 1.4em; /* 25.2px with 18px base */
+  font-weight: 800;
+  letter-spacing: 1px;
 }

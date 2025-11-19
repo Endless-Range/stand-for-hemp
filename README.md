@@ -1,16 +1,90 @@
-# Astro Component Library Starter
+# Stand for Hemp
 
-A comprehensive, production-ready component library for building modern, accessible websites with Astro and Tailwind CSS. Perfect for agencies and developers who want to ship client websites faster without sacrificing quality.
+**An urgent grassroots advocacy platform to save the US hemp industry**
 
-## Features
+![Build Status](https://img.shields.io/badge/status-in%20development-yellow)
+![Build Sprint](https://img.shields.io/badge/build%20sprint-7%20days-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-- **11 Production-Ready Components**: Navigation, Heroes (3 variants), Split Sections, Feature Cards, CTAs (2 variants), Contact Form, Footer
-- **3 Layout Templates**: Base, Landing, and Inner page layouts with SEO built-in
-- **Customizable Design System**: Easily change colors, fonts, and spacing per project
-- **Fully Responsive**: Mobile-first design that works on all devices
-- **Accessible**: Built with semantic HTML and ARIA labels
-- **TypeScript Support**: Full type safety with TypeScript
-- **Comprehensive Documentation**: Detailed specs, usage guide, and demo page
+---
+
+## What Is This?
+
+StandforHemp.com is a frictionless advocacy website that mobilizes American consumers to contact their representatives about the hemp ban threatening the entire US hemp industry.
+
+**The Crisis**: The hemp industry faces a ban that would eliminate thousands of jobs, cost states hundreds of millions in revenue, and destroy legitimate small businesses across all 50 states.
+
+**The Solution**: Make it so easy that even granny can contact her representatives in 60 seconds. No accounts, no complex forms, no barriers.
+
+---
+
+## Build-in-Public Mission
+
+This is an **open source, build-in-public project**. We're documenting everything publicly to:
+
+- Generate awareness about the hemp crisis
+- Show transparency in advocacy tech
+- Attract contributors and supporters
+- Demonstrate grassroots impact in real-time
+
+**Timeline**: 7 days to build the platform, 1 year to mobilize enough grassroots pressure to pass new hemp protection laws.
+
+---
+
+## The User Flow
+
+```
+1. Enter zip code → Find your representatives
+2. Choose action → Send email OR make a phone call
+3. Share → Amplify on social media
+```
+
+**Target completion time**: 60 seconds from landing to action taken.
+
+---
+
+## Core Philosophy
+
+**Every extra step loses 50% of users.**
+
+This means:
+- No accounts or sign-ups
+- No complex forms
+- No confusing navigation
+- One clear path from landing to action
+- Mobile-first (most users will be on phones)
+
+---
+
+## Project Status
+
+**Current Phase**: Day 1 - Foundation
+**Build Sprint**: November 19-26, 2025
+**Campaign Duration**: 1 year to mobilize and win
+
+### Development Roadmap
+
+#### Phase 1: Core Website (Days 1-2) - IN PROGRESS
+- [x] Brand guidelines and design system
+- [ ] Homepage with zip code form
+- [ ] Action counter component
+- [ ] Mobile-responsive layout
+- [ ] Link to national petition
+
+#### Phase 2: Full Functionality (Days 2-3)
+- [ ] Google Civic Information API integration
+- [ ] Representative lookup by zip code
+- [ ] Pre-filled email templates with state-specific data
+- [ ] Call scripts with representative phone numbers
+- [ ] AI-generated personalized story paragraphs
+
+#### Phase 3: Viral Amplification (Days 4-7)
+- [ ] Social sharing with pre-filled posts
+- [ ] State-by-state impact dashboard
+- [ ] Automation for outreach
+- [ ] Media kit for journalists
+
+---
 
 ## Quick Start
 
@@ -28,314 +102,152 @@ npm run build
 npm run preview
 ```
 
-Visit [http://localhost:4321](http://localhost:4321) to see your site.
+Visit [http://localhost:4321](http://localhost:4321) to see the site.
+
+---
+
+## Tech Stack
+
+- **Frontend**: [Astro](https://astro.build) - Fast static site generation
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com) - Following brand guidelines
+- **APIs**: Google Civic Information API for representative lookup
+- **Database**: Supabase (free tier) or Vercel KV for action counter
+- **Hosting**: Vercel - Fast deploys, edge network
+- **Analytics**: Plausible or Vercel Analytics (privacy-friendly)
+
+---
 
 ## Project Structure
 
 ```
-astro-component-library/
+stand-for-hemp/
 ├── src/
 │   ├── components/
-│   │   └── library/          # All reusable components
-│   │       ├── Navigation.astro
-│   │       ├── HeroMinimal.astro
-│   │       ├── HeroBold.astro
-│   │       ├── HeroVideo.astro
-│   │       ├── SplitSection.astro
-│   │       ├── FeatureCard.astro
-│   │       ├── FeatureGrid.astro
-│   │       ├── CTASimple.astro
-│   │       ├── CTASplit.astro
-│   │       ├── ContactForm.astro
-│   │       └── Footer.astro
+│   │   └── library/           # Reusable components
 │   ├── layouts/
-│   │   ├── BaseLayout.astro    # Foundation layout with SEO
-│   │   ├── LandingLayout.astro # Landing page template
-│   │   └── InnerLayout.astro   # Content page template
+│   │   ├── BaseLayout.astro   # Foundation layout
+│   │   └── LandingLayout.astro
 │   ├── pages/
-│   │   ├── index.astro         # Homepage
-│   │   └── components-demo.astro # Component showcase
+│   │   ├── index.astro        # Homepage with zip form
+│   │   ├── take-action.astro  # Representative lookup
+│   │   └── success.astro      # Success + sharing page
+│   ├── data/
+│   │   └── state-impact.json  # State economic data
 │   └── styles/
-│       └── global.css          # Design system + Tailwind
-├── specs/                      # Documentation
-│   ├── component-library-spec.md
-│   ├── design-system-spec.md
-│   └── usage-guide.md
-└── public/                     # Static assets
+│       └── global.css         # Brand design system
+├── BRAND-GUIDELINES.md        # Brand colors, typography, voice
+├── PROJECT-CONTEXT.md         # Full project context & strategy
+└── public/                    # Static assets
 ```
 
-## Component Overview
-
-### Navigation
-Sticky header with transparent-to-solid scroll effect and mobile hamburger menu.
-
-```astro
-<Navigation
-  logoText="My Brand"
-  navLinks={[
-    {label: "Home", href: "/"},
-    {label: "About", href: "/about"}
-  ]}
-  cta={{label: "Get Started", href: "/start"}}
-  transparent={true}
-/>
-```
-
-### Hero Components
-
-**HeroMinimal**: Clean, centered hero
-```astro
-<HeroMinimal
-  title="Welcome to Our Site"
-  subtitle="Build amazing websites faster"
-  cta={{label: "Learn More", href: "/about"}}
-/>
-```
-
-**HeroBold**: Large typography with gradient option
-```astro
-<HeroBold
-  headline="Transform Your <span class='highlight'>Business</span>"
-  subtext="Join thousands of satisfied customers"
-  cta={{label: "Get Started", href: "/start"}}
-  gradientBackground={true}
-/>
-```
-
-**HeroVideo**: Dramatic video background
-```astro
-<HeroVideo
-  videoSrc="/videos/hero.mp4"
-  title="Innovation Meets Design"
-  overlayOpacity="medium"
-/>
-```
-
-### Split Sections
-
-Two-column layouts with content and images:
-
-```astro
-<SplitSection
-  title="Why Choose Us"
-  content="<p>Your content here...</p>"
-  imageSrc="/images/team.jpg"
-  imageAlt="Our team"
-  imageRight={false}
-/>
-```
-
-### Feature Components
-
-**FeatureGrid**: Container for feature cards
-```astro
-<FeatureGrid title="Our Services" columns={3}>
-  <FeatureCard
-    icon="🚀"
-    title="Fast"
-    description="Lightning-fast performance"
-  />
-  <!-- More cards... -->
-</FeatureGrid>
-```
-
-### CTA Components
-
-**CTASimple**: Centered call-to-action
-```astro
-<CTASimple
-  title="Ready to Get Started?"
-  primaryCta={{label: "Sign Up", href: "/signup"}}
-/>
-```
-
-**CTASplit**: CTA with image
-```astro
-<CTASplit
-  title="See It In Action"
-  content="Watch our platform transform your workflow"
-  cta={{label: "Watch Demo", href: "/demo"}}
-  imageSrc="/images/dashboard.jpg"
-/>
-```
-
-### Contact Form
-
-```astro
-<ContactForm
-  title="Get In Touch"
-  action="https://formspree.io/f/YOUR_ID"
-/>
-```
-
-### Footer
-
-```astro
-<Footer
-  companyName="Acme Corp"
-  tagline="Making the world better"
-  columns={[...]}
-  socialLinks={[...]}
-/>
-```
-
-## Layout Templates
-
-### LandingLayout
-
-For landing pages with full-width sections:
-
-```astro
----
-import LandingLayout from '../layouts/LandingLayout.astro';
-import HeroBold from '../components/library/HeroBold.astro';
 ---
 
-<LandingLayout title="Home" description="Welcome">
-  <HeroBold ... />
-  <!-- More sections -->
-</LandingLayout>
-```
+## Brand Guidelines
 
-### InnerLayout
+### Color Palette
 
-For content pages with page headers:
+- **Hemp Green** (`#4a6741`) - Primary CTA buttons, action elements
+- **Soft Cream** (`#faf8f3`) - Main background
+- **Sky Blue** (`#7ba3a0`) - Trust indicators, stats, data
+- **Earth Brown** (`#8b6f47`) - Urgency badges, secondary actions
+- **Soil Dark** (`#2d3e2b`) - Body text, dark backgrounds
+- **Wheat Gold** (`#d4a574`) - Highlights, accents, links
+- **Warm Cream** (`#f5f1e8`) - Card backgrounds
 
-```astro
+### Brand Voice
+
+- **Urgent but not panicked**: We have limited time, but we're organized
+- **Grassroots & authentic**: Real people, real stories, real impact
+- **Accessible**: No jargon - anyone can take action
+- **Empowering**: Your voice matters. You can make a difference.
+- **Agricultural heritage**: Rooted in American farming
+
 ---
-import InnerLayout from '../layouts/InnerLayout.astro';
+
+## Key Messages
+
+**Main Headline**: "The Hemp Ban Will Cost [State] $XXM and Thousands of Jobs"
+
+**Value Propositions**:
+- Takes 60 seconds
+- No sign-up required
+- Your voice matters
+- Join thousands of Americans taking action
+
 ---
 
-<InnerLayout
-  title="About Us"
-  pageTitle="Our Story"
-  pageSubtitle="We've been innovating since 2010"
->
-  <div class="prose">
-    <!-- Your content -->
-  </div>
-</InnerLayout>
-```
+## Target Users
 
-## Customization
+### Primary
+- **Hemp consumers**: People who use hemp products for sleep, pain, anxiety
+- **Hemp business owners**: Farmers, retailers, manufacturers
+- **First-time activists**: Regular people who've never contacted a representative
 
-### Changing Colors
+### Key Insight
+Most users have NEVER done political advocacy. We're mobilizing regular people who just want their gummies to stay legal, not preaching to activists.
 
-1. Open `src/styles/global.css`
-2. Find the `@theme` section
-3. Update the color hex values:
+---
 
-```css
-/* Primary Color */
---color-primary-600: #9333ea; /* Change to your brand color */
-```
+## Success Metrics
 
-Use [UI Colors](https://uicolors.app/) to generate complete palettes.
+### Primary
+- Total actions taken (emails + calls)
+- States represented (geographic spread)
+- Viral coefficient (average shares per user)
 
-### Changing Fonts
+### Secondary
+- Time to action (speed from landing to completion)
+- Mobile completion rate
+- Return rate (users taking multiple actions)
+- Media mentions
 
-1. Update the Google Fonts link in `src/layouts/BaseLayout.astro`
-2. Update `--font-sans` in `src/styles/global.css`:
+### Aspirational
+- Representatives who publicly respond
+- Policy impact (ban delayed/stopped)
 
-```css
---font-sans: 'Your Font', system-ui, sans-serif;
-```
+---
 
-### Customizing Components
+## How to Contribute
 
-Components accept props for easy customization. Check the detailed prop documentation in each component file or in `specs/component-library-spec.md`.
+We welcome contributions from:
+- **Developers**: Frontend, API integration, automation
+- **Designers**: Graphics, social media assets
+- **Writers**: Copy, email templates, social posts
+- **Data researchers**: State economic impact data
+- **Advocates**: Spreading the word, organizing
 
-## Design System
+### Ways to Help
 
-### Colors
+1. **Code contributions**: Submit PRs for features or fixes
+2. **Data gathering**: Research state-specific economic impact
+3. **Content creation**: Write compelling stories and templates
+4. **Testing**: Test on different devices and browsers
+5. **Sharing**: Spread the word on social media
 
-- **Neutral**: 50-950 shades for text, backgrounds, borders
-- **Primary**: Blue (customizable) - main accent color
-- **Secondary**: Green (customizable) - secondary accent
+---
 
-### Typography
+## Development Principles
 
-- **Font**: Inter (Google Fonts)
-- **Scale**: Responsive (mobile → desktop)
-- **Weights**: 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold)
+### Speed > Perfection
+Ship fast, iterate in production. We have 7 days.
 
-### Spacing
+### Mobile-First
+Most traffic will be mobile. Test on phones first.
 
-Consistent spacing scale from `xs` (8px) to `4xl` (96px)
+### Accessibility Matters
+High contrast, clear CTAs, screen reader friendly.
 
-### Responsive Breakpoints
+### Keep It Simple
+If granny can't use it, it's too complex.
 
-- **sm**: 640px
-- **md**: 768px
-- **lg**: 1024px
-- **xl**: 1280px
-- **2xl**: 1536px
+---
 
 ## Documentation
 
-Detailed documentation is available in the `/specs` folder:
+- **[PROJECT-CONTEXT.md](PROJECT-CONTEXT.md)**: Complete project strategy, user flows, technical architecture
+- **[BRAND-GUIDELINES.md](BRAND-GUIDELINES.md)**: Colors, typography, component design, brand voice
 
-- **[component-library-spec.md](specs/component-library-spec.md)**: Complete component API reference
-- **[design-system-spec.md](specs/design-system-spec.md)**: Design system guidelines
-- **[usage-guide.md](specs/usage-guide.md)**: Comprehensive usage examples and patterns
-
-## Demo Page
-
-Visit [/components-demo](http://localhost:4321/components-demo) to see all components in action with live examples.
-
-## SEO Features
-
-All layouts include:
-- Meta titles and descriptions
-- Open Graph tags (Facebook, LinkedIn)
-- Twitter Card support
-- Canonical URLs
-- Structured data ready
-
-## Form Integration
-
-The ContactForm component works with:
-- **Formspree**: Set `action="https://formspree.io/f/YOUR_ID"`
-- **Netlify Forms**: Add `data-netlify="true"` attribute
-- **Custom APIs**: Point to your endpoint
-
-## Deployment
-
-Build and deploy to any static hosting:
-
-```bash
-npm run build
-```
-
-Deploy the `dist/` folder to:
-- Netlify
-- Vercel
-- Cloudflare Pages
-- GitHub Pages
-- Any static hosting
-
-## Browser Support
-
-- Chrome (last 2 versions)
-- Firefox (last 2 versions)
-- Safari (last 2 versions)
-- Edge (last 2 versions)
-- Mobile browsers
-
-## Accessibility
-
-- Semantic HTML
-- ARIA labels where needed
-- Keyboard navigation support
-- WCAG AA color contrast
-- Focus states on interactive elements
-
-## Tech Stack
-
-- **[Astro](https://astro.build)**: Static site generator
-- **[Tailwind CSS v4](https://tailwindcss.com)**: Utility-first CSS framework
-- **[TypeScript](https://www.typescriptlang.org/)**: Type safety
-- **Modern CSS**: CSS variables, custom properties
+---
 
 ## Commands
 
@@ -345,66 +257,61 @@ Deploy the `dist/` folder to:
 | `npm run dev` | Start dev server at `localhost:4321` |
 | `npm run build` | Build production site to `./dist/` |
 | `npm run preview` | Preview production build locally |
-| `npm run astro ...` | Run Astro CLI commands |
-
-## Best Practices
-
-1. **Keep library components untouched**: Copy to `src/components/project/` for customization
-2. **Optimize images**: Use WebP format and responsive sizes
-3. **Test responsive**: Check all breakpoints during development
-4. **Accessibility**: Test keyboard navigation and screen readers
-5. **Performance**: Lazy load images and optimize assets
-
-## Tips for Multi-Client Use
-
-1. **Create a template repository**: Fork this as a base for new projects
-2. **Customize per client**: Update colors and fonts in `global.css`
-3. **Document changes**: Track client-specific modifications
-4. **Version control**: Use Git branches for different clients
-5. **Component extensions**: Create client-specific wrapper components
-
-## Troubleshooting
-
-**Styles not applying?**
-- Ensure `global.css` is imported in your layout
-- Check Tailwind classes are correct
-- Clear browser cache
-
-**Mobile menu not working?**
-- Check for JavaScript errors in console
-- Ensure no conflicting IDs exist
-
-**Form not submitting?**
-- Verify `action` URL is correct
-- Check form service configuration
-- Review browser console for errors
-
-## Contributing
-
-This is a starter template. Feel free to:
-- Add new components
-- Enhance existing components
-- Improve documentation
-- Share your improvements
-
-## Resources
-
-- [Astro Documentation](https://docs.astro.build)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [UI Colors - Palette Generator](https://uicolors.app/)
-- [Google Fonts](https://fonts.google.com)
-- [Unsplash - Free Images](https://unsplash.com)
-
-## License
-
-This component library is provided as-is for use in client projects. Modify and distribute freely.
-
-## Support
-
-For questions about Astro, consult the [official documentation](https://docs.astro.build) or join the [Astro Discord](https://astro.build/chat).
 
 ---
 
-**Built with** ❤️ **using Astro + Tailwind CSS**
+## API Keys Needed
 
-Ready to build amazing websites? Start by customizing the design system, then explore the components demo page!
+- **Google Civic Information API**: For representative lookup (free)
+- **Backup**: whoismyrepresentative.com API (no key required)
+- **Optional**: Claude API for personalized story generation
+
+---
+
+## Deployment
+
+Deploy to Vercel for fast, global edge network:
+
+```bash
+npm run build
+# Deploy dist/ folder to Vercel
+```
+
+---
+
+## License
+
+MIT License - Free to use, modify, and distribute.
+
+This is a grassroots advocacy project. Use this code to build similar platforms for other causes.
+
+---
+
+## Contact & Social
+
+- **Website**: StandforHemp.com (launching soon)
+- **Issues**: [GitHub Issues](https://github.com/[your-repo]/stand-for-hemp/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/[your-repo]/stand-for-hemp/discussions)
+
+---
+
+## The Stakes
+
+**Thousands of jobs** across all 50 states
+**Hundreds of millions** in lost state revenue
+**Legitimate businesses** destroyed overnight
+**Americans** pushed to unregulated black markets
+
+**But we can stop this.**
+
+One voice might not be heard. But thousands of voices, all speaking up at once, cannot be ignored.
+
+**Join us. Take action. Save hemp.**
+
+---
+
+**Version**: 1.0
+**Last Updated**: November 19, 2025
+**Status**: Day 1 - Foundation Phase
+**Build Sprint**: 7 days to launch
+**Campaign Duration**: 1 year to win

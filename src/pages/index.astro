@@ -1,97 +1,348 @@
 ---
 /**
- * Homepage - Example Landing Page
+ * Stand for Hemp - Homepage
  *
- * This is a sample homepage demonstrating how to use the component library.
- * Customize this file for your actual projects.
+ * Urgent advocacy platform to mobilize Americans to save the hemp industry.
+ * Mobile-first, frictionless design - from landing to action in 60 seconds.
  */
 
 import LandingLayout from '../layouts/LandingLayout.astro';
-import HeroBold from '../components/library/HeroBold.astro';
-import SplitSection from '../components/library/SplitSection.astro';
-import FeatureGrid from '../components/library/FeatureGrid.astro';
-import FeatureCard from '../components/library/FeatureCard.astro';
-import CTASimple from '../components/library/CTASimple.astro';
 ---
 
 <LandingLayout
-  title="Home"
-  description="A modern, accessible website built with our reusable component library. Get 11 production-ready Astro components with Tailwind CSS for faster website development."
-  ogImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop"
+  title="Stand for Hemp - Save the US Hemp Industry"
+  description="The hemp ban will eliminate thousands of jobs and cost states hundreds of millions. Take action in 60 seconds - contact your representatives to save hemp."
+  ogImage="/og-image.jpg"
 >
-  <!-- Hero Section -->
-  <HeroBold
-    headline="Build Amazing Websites <span class='highlight'>Faster</span>"
-    subtext="A comprehensive Astro component library with everything you need to create beautiful, accessible websites for your clients"
-    cta={{label: "View Components", href: "/components-demo"}}
-    secondaryCta={{label: "Read Docs", href: "/specs/usage-guide.md"}}
-    gradientBackground={true}
-  />
+  <!-- Hero Section - Dark gradient background -->
+  <section class="hero-section relative overflow-hidden py-12 md:py-20">
+    <!-- Background gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-hemp-green)] to-[var(--color-soil-dark)]"></div>
 
-  <!-- About Section -->
-  <SplitSection
-    title="Everything You Need, Ready to Go"
-    content="<p class='mb-4'>This component library includes 11 production-ready components, 3 layout templates, and a fully customizable design system.</p><p class='mb-4'>Perfect for agencies and developers who want to ship client websites faster without sacrificing quality or accessibility.</p><p>Every component is responsive, accessible, and built with TypeScript for maximum reliability.</p>"
-    imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
-    imageAlt="Team collaboration"
-    cta={{label: "See Components", href: "/components-demo"}}
-    imageRight={false}
-    backgroundColor="bg-white"
-  />
+    <!-- Content -->
+    <div class="relative z-10 container mx-auto px-6 text-center">
+      <!-- Urgency Badge with Logo and Countdown -->
+      <div class="mb-6 flex justify-center">
+        <div class="urgency-badge" id="countdown-badge">
+          <span class="urgency-label">The clock is ticking:</span>
+          <span class="countdown-timer">Calculating...</span>
+        </div>
+      </div>
 
-  <!-- Features -->
-  <FeatureGrid
-    title="Why Choose This Library?"
-    subtitle="Everything you need to build modern, professional websites"
-    columns={3}
-  >
-    <FeatureCard
-      icon="fa6-solid:rocket"
-      title="Production Ready"
-      description="11 fully-featured components ready to use in your projects right away."
-    />
-    <FeatureCard
-      icon="fa6-solid:palette"
-      title="Easy Customization"
-      description="Change colors, fonts, and spacing per project with CSS variables."
-    />
-    <FeatureCard
-      icon="fa6-solid:mobile-screen-button"
-      title="Fully Responsive"
-      description="Mobile-first design that looks great on all devices and screen sizes."
-    />
-    <FeatureCard
-      icon="fa6-solid:universal-access"
-      title="Accessible"
-      description="Built with semantic HTML, ARIA labels, and WCAG AA compliance in mind."
-    />
-    <FeatureCard
-      icon="fa6-solid:book"
-      title="Well Documented"
-      description="Comprehensive specs, usage guides, and examples for every component."
-    />
-    <FeatureCard
-      icon="fa6-solid:bolt"
-      title="Fast Performance"
-      description="Optimized with Astro's static site generation for lightning-fast load times."
-    />
-  </FeatureGrid>
+      <!-- Main Headline -->
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+        They're <span class="text-[var(--color-wheat-gold)]">Killing</span> the Hemp Industry. <br>Fight Back in 
+        <span class="text-[var(--color-wheat-gold)]">60 Seconds.</span>
+      </h1>
 
-  <!-- Technology Section -->
-  <SplitSection
-    title="Built with Modern Tools"
-    content="<p class='mb-4'><strong>Astro</strong> - The modern static site generator that delivers zero JavaScript by default</p><p class='mb-4'><strong>Tailwind CSS v4</strong> - Utility-first CSS with our custom design system</p><p class='mb-4'><strong>TypeScript</strong> - Full type safety for reliable, maintainable code</p><p>All components work seamlessly together and can be customized to match any brand.</p>"
-    imageSrc="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
-    imageAlt="Development workspace"
-    imageRight={true}
-    backgroundColor="bg-neutral-50"
-  />
+      <!-- Subheadline -->
+      <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-reading mx-auto">
+        Tell your representatives to stop this. Takes 60 seconds.
+      </p>
 
-  <!-- CTA Section -->
-  <CTASimple
-    title="Ready to Build Something Amazing?"
-    subtitle="Start exploring the component library and see how easy it is to create beautiful websites"
-    primaryCta={{label: "View Component Demo", href: "/components-demo"}}
-    secondaryCta={{label: "Read Documentation", href: "/specs/usage-guide.md"}}
-  />
+      <!-- Zip Code Form -->
+      <div class="max-w-form mx-auto mb-8">
+        <form class="flex flex-col sm:flex-row gap-4" action="/take-action/" method="GET">
+          <input
+            type="text"
+            name="zip"
+            inputmode="numeric"
+            pattern="[0-9]{5}"
+            maxlength="5"
+            placeholder="Enter your zip code"
+            required
+            class="flex-1 px-6 py-4 text-lg rounded-lg border-2 border-white/20 bg-white/95 text-[var(--color-soil-dark)] placeholder-neutral-500 focus:outline-none focus:border-[var(--color-wheat-gold)] focus:ring-2 focus:ring-[var(--color-wheat-gold)]/50"
+            aria-label="Enter your 5-digit zip code"
+          />
+          <button
+            type="submit"
+            class="btn-primary whitespace-nowrap min-w-[180px]"
+          >
+            Find My Reps →
+          </button>
+        </form>
+      </div>
+
+      <!-- Social Proof -->
+      <div class="text-white/80 text-sm md:text-base">
+        <p class="mb-2">✅ Takes 60 seconds &nbsp; | &nbsp; ✅ No sign-up required &nbsp; | &nbsp; ✅ Your voice matters</p>
+        <p class="font-semibold text-lg">Join <span id="action-counter" class="text-[var(--color-wheat-gold)]">2,847</span> Americans taking action</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Crisis - Stats Section -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4" style="color: var(--color-soil-dark);">
+          What's at Stake
+        </h2>
+        <p class="text-xl text-neutral-600 max-w-content mx-auto">
+          The hemp ban threatens legitimate businesses, American jobs, and consumer access across all 50 states.
+        </p>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto mb-12">
+        <!-- Stat Card 1 -->
+        <div class="stat-card text-center">
+          <div class="text-5xl md:text-6xl font-bold mb-3" style="color: var(--color-hemp-green);">
+            15,000+
+          </div>
+          <h3 class="text-xl md:text-2xl font-semibold mb-2" style="color: var(--color-soil-dark);">
+            Jobs at Risk
+          </h3>
+          <p class="text-neutral-600">
+            Farmers, retailers, and manufacturers across America
+          </p>
+        </div>
+
+        <!-- Stat Card 2 -->
+        <div class="stat-card text-center">
+          <div class="text-5xl md:text-6xl font-bold mb-3" style="color: var(--color-hemp-green);">
+            $500M+
+          </div>
+          <h3 class="text-xl md:text-2xl font-semibold mb-2" style="color: var(--color-soil-dark);">
+            Revenue Loss
+          </h3>
+          <p class="text-neutral-600">
+            States will lose hundreds of millions in tax revenue
+          </p>
+        </div>
+
+        <!-- Stat Card 3 -->
+        <div class="stat-card text-center">
+          <div class="text-5xl md:text-6xl font-bold mb-3" style="color: var(--color-hemp-green);">
+            1,000s
+          </div>
+          <h3 class="text-xl md:text-2xl font-semibold mb-2" style="color: var(--color-soil-dark);">
+            Small Businesses
+          </h3>
+          <p class="text-neutral-600">
+            Legitimate family businesses destroyed overnight
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why This Matters -->
+  <section class="py-16 md:py-24" style="background-color: var(--color-soft-cream);">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-12" style="color: var(--color-soil-dark);">
+        Why Hemp Matters
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+        <!-- Reason 1 -->
+        <div class="card">
+          <div class="text-4xl mb-4">👨‍🌾</div>
+          <h3 class="text-2xl font-bold mb-3" style="color: var(--color-hemp-green);">
+            American Farmers
+          </h3>
+          <p class="text-lg text-neutral-700 leading-relaxed">
+            Hemp is a legal, sustainable crop that supports thousands of American farming families. The ban destroys their livelihoods overnight.
+          </p>
+        </div>
+
+        <!-- Reason 2 -->
+        <div class="card">
+          <div class="text-4xl mb-4">💰</div>
+          <h3 class="text-2xl font-bold mb-3" style="color: var(--color-hemp-green);">
+            State Revenue
+          </h3>
+          <p class="text-lg text-neutral-700 leading-relaxed">
+            States collect millions in tax revenue from legal hemp sales. This ban means budget cuts to schools, roads, and public services.
+          </p>
+        </div>
+
+        <!-- Reason 3 -->
+        <div class="card">
+          <div class="text-4xl mb-4">🏥</div>
+          <h3 class="text-2xl font-bold mb-3" style="color: var(--color-hemp-green);">
+            Americans' Wellness
+          </h3>
+          <p class="text-lg text-neutral-700 leading-relaxed">
+            Millions rely on legal hemp products for sleep, pain relief, and anxiety. The ban pushes them to unregulated black markets.
+          </p>
+        </div>
+
+        <!-- Reason 4 -->
+        <div class="card">
+          <div class="text-4xl mb-4">🏪</div>
+          <h3 class="text-2xl font-bold mb-3" style="color: var(--color-hemp-green);">
+            Small Businesses
+          </h3>
+          <p class="text-lg text-neutral-700 leading-relaxed">
+            Thousands of legitimate retailers, manufacturers, and distributors will close. Jobs lost. Communities harmed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-4" style="color: var(--color-soil-dark);">
+        How to Take Action
+      </h2>
+      <p class="text-xl text-neutral-600 text-center mb-12 max-w-content mx-auto">
+        It takes just 60 seconds. Every voice matters.
+      </p>
+
+      <!-- Steps -->
+      <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+        <!-- Step 1 -->
+        <div class="text-center">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center text-3xl font-bold text-white" style="background-color: var(--color-hemp-green);">
+            1
+          </div>
+          <h3 class="text-2xl font-bold mb-3" style="color: var(--color-soil-dark);">
+            Enter Zip Code
+          </h3>
+          <p class="text-lg text-neutral-600">
+            Find your representatives instantly
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center text-3xl font-bold text-white" style="background-color: var(--color-hemp-green);">
+            2
+          </div>
+          <h3 class="text-2xl font-bold mb-3" style="color: var(--color-soil-dark);">
+            Choose Action
+          </h3>
+          <p class="text-lg text-neutral-600">
+            Send email or make a phone call (or both!)
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center text-3xl font-bold text-white" style="background-color: var(--color-hemp-green);">
+            3
+          </div>
+          <h3 class="text-2xl font-bold mb-3" style="color: var(--color-soil-dark);">
+            Share & Amplify
+          </h3>
+          <p class="text-lg text-neutral-600">
+            Spread the word on social media
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section - Sky Blue -->
+  <section class="py-20 md:py-32 text-center" style="background-color: var(--color-sky-blue);">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+        Your Voice Can Save Hemp
+      </h2>
+      <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-content mx-auto">
+        One voice might not be heard. But thousands of voices, all speaking up at once, cannot be ignored.
+      </p>
+
+      <!-- Zip Code Form (Duplicate) -->
+      <div class="max-w-form mx-auto mb-8">
+        <form class="flex flex-col sm:flex-row gap-4" action="/take-action/" method="GET">
+          <input
+            type="text"
+            name="zip"
+            inputmode="numeric"
+            pattern="[0-9]{5}"
+            maxlength="5"
+            placeholder="Enter your zip code"
+            required
+            class="flex-1 px-6 py-4 text-lg rounded-lg border-2 border-white/20 bg-white text-[var(--color-soil-dark)] placeholder-neutral-500 focus:outline-none focus:border-[var(--color-wheat-gold)] focus:ring-2 focus:ring-[var(--color-wheat-gold)]/50"
+            aria-label="Enter your 5-digit zip code"
+          />
+          <button
+            type="submit"
+            class="btn-primary whitespace-nowrap min-w-[180px]"
+          >
+            Take Action Now
+          </button>
+        </form>
+      </div>
+
+      <div class="text-white/90 text-lg">
+        <p class="font-semibold">Join the movement. Save American hemp.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countdown and Counter Scripts -->
+  <script>
+    // Countdown Timer to November 12, 2026
+    const countdownBadge = document.getElementById('countdown-badge');
+    if (countdownBadge) {
+      const targetDate = new Date('2026-11-12T00:00:00').getTime();
+      const timerElement = countdownBadge.querySelector('.countdown-timer');
+
+      const updateCountdown = () => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+          if (timerElement) {
+            timerElement.textContent = 'THE BAN IS IN EFFECT';
+          }
+          return;
+        }
+
+        // Calculate time units
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Format the countdown display - always show D:H:M:S for interactivity
+        const daysText = `${days}D`;
+        const hoursText = `${hours.toString().padStart(2, '0')}H`;
+        const minutesText = `${minutes.toString().padStart(2, '0')}M`;
+        const secondsText = `${seconds.toString().padStart(2, '0')}S`;
+
+        if (timerElement) {
+          timerElement.textContent = `${daysText} ${hoursText} ${minutesText} ${secondsText}`;
+        }
+      };
+
+      // Update immediately and then every second
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    // Action counter animation on page load
+    const counter = document.getElementById('action-counter');
+    if (counter) {
+      const targetNumber = 2847;
+      const duration = 2000; // 2 seconds
+      const increment = targetNumber / (duration / 16); // 60fps
+      let currentNumber = 0;
+
+      const updateCounter = () => {
+        currentNumber += increment;
+        if (currentNumber >= targetNumber) {
+          counter.textContent = targetNumber.toLocaleString();
+        } else {
+          counter.textContent = Math.floor(currentNumber).toLocaleString();
+          requestAnimationFrame(updateCounter);
+        }
+      };
+
+      // Start animation when visible
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          updateCounter();
+          observer.disconnect();
+        }
+      });
+
+      observer.observe(counter);
+    }
+  </script>
 </LandingLayout>

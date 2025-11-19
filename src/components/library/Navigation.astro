@@ -33,23 +33,23 @@ const {
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ],
-  cta = { label: "Get Started", href: "/get-started" },
+  cta,
   transparent = true,
 } = Astro.props;
 ---
 
 <header
   id="main-nav"
-  class={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${transparent ? "bg-transparent" : "bg-white shadow-md"}`}
+  class={`absolute top-0 left-0 right-0 z-50 transition-all duration-300 ${transparent ? "bg-transparent" : "bg-white shadow-md"}`}
 >
   <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 md:h-20">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-2 text-xl font-bold text-neutral-900 hover:text-primary-600 transition-colors">
+      <a href="/" class="flex items-center space-x-2 text-xl font-bold transition-colors">
         {logoIsImage ? (
-          <img src={logoText} alt="Logo" class="h-8 md:h-10" />
+          <img src={logoText} alt="Stand for Hemp Logo" class="h-10 md:h-12" />
         ) : (
-          <span>{logoText}</span>
+          <span class="text-white">{logoText}</span>
         )}
       </a>
 
@@ -63,12 +63,14 @@ const {
             {link.label}
           </a>
         ))}
-        <a
-          href={cta.href}
-          class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors"
-        >
-          {cta.label}
-        </a>
+        {cta && (
+          <a
+            href={cta.href}
+            class="btn-primary"
+          >
+            {cta.label}
+          </a>
+        )}
       </div>
 
       <!-- Mobile Menu Button -->
@@ -122,12 +124,14 @@ const {
             {link.label}
           </a>
         ))}
-        <a
-          href={cta.href}
-          class="block mx-4 text-center bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors"
-        >
-          {cta.label}
-        </a>
+        {cta && (
+          <a
+            href={cta.href}
+            class="block mx-4 text-center btn-primary"
+          >
+            {cta.label}
+          </a>
+        )}
       </div>
     </div>
   </nav>
