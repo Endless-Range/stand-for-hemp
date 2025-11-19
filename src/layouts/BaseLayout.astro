@@ -30,8 +30,8 @@ export interface Props {
 
 const {
   title,
-  description = 'A modern, accessible website built with Astro and Tailwind CSS.',
-  ogImage = '/og-image.jpg',
+  description = 'Stand for Hemp - Advocating for hemp legalization and supporting hemp-friendly legislation across America.',
+  ogImage = '/og-image.png',
   canonicalUrl,
   includeNav = true,
   includeFooter = true,
@@ -40,8 +40,8 @@ const {
   articleAuthor,
 } = Astro.props;
 
-const siteName = 'Your Site Name';
-const siteUrl = Astro.site || 'https://yoursite.com';
+const siteName = 'Stand for Hemp';
+const siteUrl = Astro.site || 'https://standforhemp.com';
 const fullTitle = title ? `${title} | ${siteName}` : siteName;
 const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
