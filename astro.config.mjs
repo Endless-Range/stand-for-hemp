@@ -7,7 +7,8 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com', // Replace with your actual domain
+  output: 'server', // Enable server-side rendering for API routes
+  site: 'https://standforhemp.com',
   integrations: [sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()]
