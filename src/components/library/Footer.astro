@@ -1,0 +1,109 @@
+---
+/**
+ * Footer Component
+ *
+ * A multi-column footer with navigation links, social media, and copyright.
+ * Fully customizable and responsive.
+ *
+ * Props:
+ * @param {string} companyName - Company name for copyright
+ * @param {string} tagline - Optional company tagline/description
+ * @param {Array} columns - Footer navigation columns [{title: string, links: [{label: string, href: string}]}]
+ * @param {Array} socialLinks - Social media links [{platform: string, href: string, icon: string}]
+ * @param {string} backgroundColor - Background color class (default: 'bg-neutral-900')
+ */
+
+export interface Props {
+  companyName: string;
+  tagline?: string;
+  columns: Array<{
+    title: string;
+    links: Array<{ label: string; href: string }>;
+  }>;
+  socialLinks?: Array<{
+    platform: string;
+    href: string;
+    icon: string;
+  }>;
+  backgroundColor?: string;
+}
+
+const {
+  companyName,
+  tagline,
+  columns,
+  socialLinks,
+  backgroundColor = 'bg-neutral-900',
+} = Astro.props;
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class={`${backgroundColor} text-white pt-12 pb-8`}>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Main Footer Content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-8">
+      <!-- Company Info -->
+      <div class="lg:col-span-4">
+        <h3 class="text-2xl font-bold mb-3">{companyName}</h3>
+        {tagline && <p class="text-neutral-400 mb-6">{tagline}</p>}
+
+        <!-- Social Links -->
+        {socialLinks && socialLinks.length > 0 && (
+          <div class="flex space-x-4">
+            {socialLinks.map((social) => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-neutral-400 hover:text-white transition-colors"
+                aria-label={social.platform}
+              >
+                <span set:html={social.icon} />
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Footer Columns -->
+      {columns.map((column) => (
+        <div class="lg:col-span-2">
+          <p class="text-sm font-semibold uppercase tracking-wider mb-4">
+            {column.title}
+          </p>
+          <ul class="space-y-2">
+            {column.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-neutral-400 hover:text-white transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="pt-8 border-t border-neutral-800">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-neutral-400 text-sm mb-4 md:mb-0">
+          &copy; {currentYear} {companyName}. All rights reserved.
+        </p>
+
+        <div class="flex space-x-6">
+          <a href="/privacy" class="text-neutral-400 hover:text-white text-sm transition-colors">
+            Privacy Policy
+          </a>
+          <a href="/terms" class="text-neutral-400 hover:text-white text-sm transition-colors">
+            Terms of Service
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

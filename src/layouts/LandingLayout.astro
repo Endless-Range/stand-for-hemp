@@ -1,0 +1,53 @@
+---
+/**
+ * Landing Page Layout
+ *
+ * Optimized layout for landing pages with full-width sections.
+ * Includes navigation and footer by default.
+ *
+ * Props:
+ * All BaseLayout props plus:
+ * @param {boolean} transparentNav - Use transparent navigation (default: true)
+ */
+
+import BaseLayout from './BaseLayout.astro';
+import Navigation from '../components/library/Navigation.astro';
+import Footer from '../components/library/Footer.astro';
+import { footerConfig } from '../config/footer';
+
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  transparentNav?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage,
+  canonicalUrl,
+  transparentNav = true,
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  canonicalUrl={canonicalUrl}
+>
+  <Navigation slot="navigation" transparent={transparentNav} />
+
+  <slot />
+
+  <Footer
+    slot="footer"
+    companyName={footerConfig.companyName}
+    tagline={footerConfig.tagline}
+    columns={footerConfig.columns}
+    socialLinks={footerConfig.socialLinks}
+    backgroundColor={footerConfig.backgroundColor}
+  />
+</BaseLayout>
