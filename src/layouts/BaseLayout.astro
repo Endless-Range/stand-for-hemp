@@ -124,6 +124,9 @@ const jsonLd = ogType === 'article' && articlePublishedTime ? {
     {jsonLd && (
       <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     )}
+
+    <!-- Analytics -->
+    <script is:inline defer data-domain="standforhemp.com" src="https://plausible.endlessrange.com/js/script.js"></script>
   </head>
   <body>
     {includeNav && (
