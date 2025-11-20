@@ -77,6 +77,54 @@ import LandingLayout from '../layouts/LandingLayout.astro';
     </div>
   </section>
 
+  <!-- State Impact Data -->
+  <section id="state-impact-section" class="py-12 bg-gradient-to-br from-[var(--color-hemp-green)] to-[var(--color-soil-dark)] hidden">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="text-center mb-8">
+        <h2 id="state-impact-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Impact in Your State
+        </h2>
+        <div id="state-banned-warning" class="hidden bg-red-100 border-2 border-red-600 text-red-800 px-6 py-4 rounded-lg mb-6 text-lg font-bold">
+          ⚠️ WARNING: Hemp products already banned in your state!
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Jobs at Risk -->
+        <div class="bg-white/95 rounded-lg p-6 text-center">
+          <div class="text-2xl md:text-3xl font-bold mb-3 text-neutral-800">
+            Jobs at Risk
+          </div>
+          <div class="text-4xl md:text-5xl font-bold" style="color: var(--color-hemp-green);" id="state-jobs">
+            Loading...
+          </div>
+        </div>
+
+        <!-- Revenue -->
+        <div class="bg-white/95 rounded-lg p-6 text-center">
+          <div class="text-2xl md:text-3xl font-bold mb-3 text-neutral-800">
+            Annual Revenue
+          </div>
+          <div class="text-4xl md:text-5xl font-bold" style="color: var(--color-hemp-green);" id="state-revenue">
+            Loading...
+          </div>
+        </div>
+
+        <!-- Businesses -->
+        <div class="bg-white/95 rounded-lg p-6 text-center">
+          <div class="text-xl md:text-2xl font-bold mb-3 text-neutral-800">
+            Hemp Businesses
+          </div>
+          <div class="text-3xl md:text-4xl font-bold" style="color: var(--color-hemp-green);" id="state-businesses">
+            Loading...
+          </div>
+        </div>
+      </div>
+
+      <div id="state-notes" class="mt-6 text-white/90 text-center italic"></div>
+    </div>
+  </section>
+
   <!-- Representatives List -->
   <section id="reps-section" class="py-16 bg-white hidden">
     <div class="container mx-auto px-6 max-w-5xl">
@@ -152,6 +200,7 @@ import LandingLayout from '../layouts/LandingLayout.astro';
     const loadingState = document.getElementById('loading-state');
     const errorState = document.getElementById('error-state');
     const errorMessage = document.getElementById('error-message');
+    const stateImpactSection = document.getElementById('state-impact-section');
     const repsSection = document.getElementById('reps-section');
     const repsContainer = document.getElementById('reps-container');
     const repCardTemplate = document.getElementById('rep-card-template');
@@ -185,6 +234,7 @@ import LandingLayout from '../layouts/LandingLayout.astro';
       // Show loading state
       loadingState?.classList.remove('hidden');
       errorState?.classList.add('hidden');
+      stateImpactSection?.classList.add('hidden');
       repsSection?.classList.add('hidden');
 
       try {
@@ -205,9 +255,16 @@ import LandingLayout from '../layouts/LandingLayout.astro';
 
         // Get representatives from response
         const representatives = data.representatives;
+        const stateData = data.stateData;
+        const stateName = data.state;
 
         if (!representatives || representatives.length === 0) {
           throw new Error('No representatives found for this zip code. Please try a different zip code.');
+        }
+
+        // Display state impact data
+        if (stateData) {
+          displayStateData(stateData, stateName);
         }
 
         // Display representatives
@@ -215,10 +272,13 @@ import LandingLayout from '../layouts/LandingLayout.astro';
 
         // Hide loading, show results
         loadingState?.classList.add('hidden');
+        if (stateData) {
+          stateImpactSection?.classList.remove('hidden');
+        }
         repsSection?.classList.remove('hidden');
 
-        // Scroll to results
-        repsSection?.scrollIntoView({ behavior: 'smooth' });
+        // Scroll to state impact section
+        stateImpactSection?.scrollIntoView({ behavior: 'smooth' });
 
       } catch (error) {
         console.error('Error fetching representatives:', error);
@@ -232,6 +292,63 @@ import LandingLayout from '../layouts/LandingLayout.astro';
             ? error.message
             : 'Could not load representatives. Please try again.';
         }
+      }
+    }
+
+    /**
+     * Display state-specific impact data
+     */
+    function displayStateData(stateData, stateName) {
+      const impactTitle = document.getElementById('state-impact-title');
+      const jobsEl = document.getElementById('state-jobs');
+      const revenueEl = document.getElementById('state-revenue');
+      const businessesEl = document.getElementById('state-businesses');
+      const notesEl = document.getElementById('state-notes');
+      const bannedWarning = document.getElementById('state-banned-warning');
+
+      if (impactTitle) {
+        impactTitle.textContent = `Estimated Hemp Industry Impact in ${stateData.state_name}`;
+      }
+
+      // Format and display jobs - remove "estimated" prefix
+      if (jobsEl) {
+        let jobs = stateData.jobs_at_risk || stateData.jobs_current;
+        if (typeof jobs === 'number') {
+          jobsEl.textContent = jobs.toLocaleString();
+        } else if (jobs) {
+          // Remove "estimated" prefix if present
+          const jobsStr = String(jobs).replace(/^estimated\s+/i, '');
+          jobsEl.textContent = jobsStr;
+        } else {
+          jobsEl.textContent = 'N/A';
+        }
+      }
+
+      // Display revenue with $ prefix and remove "estimated"
+      if (revenueEl) {
+        let revenue = stateData.revenue_annual || 'N/A';
+        if (revenue !== 'N/A') {
+          // Remove "estimated" prefix if present
+          revenue = revenue.replace(/^estimated\s+/i, '');
+          revenueEl.textContent = '$' + revenue;
+        } else {
+          revenueEl.textContent = revenue;
+        }
+      }
+
+      // Display businesses
+      if (businessesEl) {
+        businessesEl.textContent = stateData.hemp_businesses || 'N/A';
+      }
+
+      // Display notes if available
+      if (notesEl && stateData.notes) {
+        notesEl.textContent = stateData.notes;
+      }
+
+      // Show banned warning if applicable
+      if (bannedWarning && stateData.ban_status) {
+        bannedWarning.classList.remove('hidden');
       }
     }
 

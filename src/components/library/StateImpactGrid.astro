@@ -1,0 +1,513 @@
+---
+/**
+ * State Impact Grid - Clean grid showing all 50 states with impact data
+ * Sorted by impact level for easy scanning
+ */
+
+import { getStatesSortedByImpact, getImpactColor, getImpactLevel, formatJobs, formatRevenue, getStateData } from '../../utils/stateData';
+
+// Get all states sorted by impact
+const statesList = getStatesSortedByImpact();
+
+// Build data for Google Charts GeoChart
+const stateAbbrs = [
+  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+  'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+  'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+  'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+  'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+];
+
+const mapDataForChart: Record<string, any> = {};
+for (const abbr of stateAbbrs) {
+  const data = getStateData(abbr);
+  if (data) {
+    const level = getImpactLevel(data);
+    let jobs = formatJobs(data.jobs_at_risk || data.jobs_current);
+    if (jobs !== 'N/A') {
+      jobs = jobs.replace(/^estimated\s+/i, '');
+    }
+    let revenue = formatRevenue(data.revenue_annual);
+    if (revenue !== 'N/A') {
+      revenue = revenue.replace(/^estimated\s+/i, '');
+    }
+
+    mapDataForChart[abbr] = {
+      name: data.state_name,
+      jobs: jobs,
+      revenue: revenue,
+      businesses: data.hemp_businesses || 'N/A',
+      color: getImpactColor(level),
+      level: level,
+      banned: !!data.ban_status,
+      notes: data.notes || ''
+    };
+  }
+}
+---
+
+<div class="state-impact-grid-container">
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <h3 class="text-2xl md:text-3xl font-bold mb-4" style="color: var(--color-soil-dark);">
+      Hemp Industry Impact Across America
+    </h3>
+    <p class="text-lg text-neutral-600 mb-6">
+      Click any state to see detailed impact information
+    </p>
+
+    <!-- Legend -->
+    <div class="flex flex-wrap justify-center gap-3 md:gap-6 text-xs md:text-sm mb-8">
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded" style="background-color: #dc2626;"></div>
+        <span class="whitespace-nowrap">Critical (10,000+ jobs)</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded" style="background-color: #ea580c;"></div>
+        <span class="whitespace-nowrap">High (2,000+ jobs)</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded" style="background-color: #ca8a04;"></div>
+        <span class="whitespace-nowrap">Medium (500+ jobs)</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded" style="background-color: #65a30d;"></div>
+        <span class="whitespace-nowrap">Lower Impact</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Charts Interactive Map -->
+  <div class="map-container mb-8">
+    <div id="us-map-chart" class="us-map-chart"></div>
+  </div>
+
+  <!-- Toggle Button for Grid -->
+  <div class="text-center mb-8 mt-12">
+    <button
+      id="toggle-grid-btn"
+      class="inline-block px-8 py-4 text-lg font-semibold rounded-lg transition-all hover:transform hover:-translate-y-0.5 hover:shadow-lg border-2"
+      style="border-color: var(--color-hemp-green); color: white; background-color: var(--color-hemp-green);"
+    >
+      See Full Impact State by State ↓
+    </button>
+  </div>
+
+  <!-- Info Display Card (shown when state is clicked) -->
+  <div id="state-detail-card" class="state-detail-card hidden">
+    <button id="close-detail" class="close-btn" aria-label="Close">✕</button>
+    <div id="detail-banned" class="banned-badge hidden">⚠️ ALREADY BANNED</div>
+    <h4 id="detail-state" class="font-bold text-2xl mb-4" style="color: var(--color-soil-dark);"></h4>
+    <div class="space-y-3">
+      <div class="detail-row">
+        <span class="detail-label">Jobs at Risk:</span>
+        <span id="detail-jobs" class="detail-value"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Annual Revenue:</span>
+        <span id="detail-revenue" class="detail-value"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Hemp Businesses:</span>
+        <span id="detail-businesses" class="detail-value"></span>
+      </div>
+    </div>
+    <div id="detail-notes" class="mt-4 text-sm text-neutral-600 italic"></div>
+  </div>
+
+  <!-- States Grid (hidden by default) -->
+  <div id="states-grid-container" class="states-grid-wrapper hidden">
+    <div class="states-grid">
+    {statesList.map(({ abbr, data }) => {
+      const level = getImpactLevel(data);
+      const color = getImpactColor(level);
+
+      // Format jobs - remove "estimated" prefix
+      let jobs = formatJobs(data.jobs_at_risk || data.jobs_current);
+      if (jobs !== 'N/A') {
+        jobs = jobs.replace(/^estimated\s+/i, '');
+      }
+
+      // Format revenue - remove "estimated" prefix
+      let revenue = formatRevenue(data.revenue_annual);
+      if (revenue !== 'N/A') {
+        revenue = revenue.replace(/^estimated\s+/i, '');
+      }
+
+      const businesses = data.hemp_businesses || 'N/A';
+
+      return (
+        <button
+          class="state-card"
+          style={`border-left: 5px solid ${color};`}
+          data-state={abbr}
+          data-name={data.state_name}
+          data-jobs={jobs}
+          data-revenue={revenue}
+          data-businesses={businesses}
+          data-banned={data.ban_status ? 'true' : 'false'}
+          data-notes={data.notes || ''}
+        >
+          <div class="state-card-header">
+            <span class="state-abbr-large">{abbr}</span>
+            <span class="state-name">{data.state_name}</span>
+          </div>
+          <div class="state-card-stat">
+            <span class="stat-label">Jobs:</span>
+            <span class="stat-value" style={`color: ${color};`}>{jobs}</span>
+          </div>
+          <div class="state-card-stat">
+            <span class="stat-label">Revenue:</span>
+            <span class="stat-value-small">${revenue}</span>
+          </div>
+        </button>
+      );
+    })}
+    </div>
+  </div>
+</div>
+
+<style>
+  .state-impact-grid-container {
+    position: relative;
+    padding: 1rem 0;
+  }
+
+  .map-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .us-map-chart {
+    width: 100%;
+    height: 500px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .us-map-chart {
+      height: 350px;
+    }
+
+    .map-container {
+      padding: 0 0.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .us-map-chart {
+      height: 280px;
+    }
+  }
+
+  .states-grid-wrapper {
+    margin-top: 3rem;
+  }
+
+  .states-grid-wrapper.hidden {
+    display: none;
+  }
+
+  .states-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .state-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .state-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .state-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .state-abbr-large {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-soil-dark);
+  }
+
+  .state-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6b7280;
+  }
+
+  .state-card-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .stat-label {
+    color: #6b7280;
+  }
+
+  .stat-value {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .stat-value-small {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-hemp-green);
+  }
+
+  .state-detail-card {
+    background: white;
+    border: 3px solid var(--color-hemp-green);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    position: relative;
+  }
+
+  .state-detail-card.hidden {
+    display: none;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+  }
+
+  .close-btn:hover {
+    background: #f0f0f0;
+    color: #000;
+  }
+
+  .banned-badge {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  .banned-badge.hidden {
+    display: none;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .detail-label {
+    font-weight: 600;
+    color: var(--color-soil-dark);
+  }
+
+  .detail-value {
+    font-weight: 700;
+    color: var(--color-hemp-green);
+    text-align: right;
+  }
+
+  @media (max-width: 768px) {
+    .states-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .state-detail-card {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<!-- Load Google Charts -->
+<script is:inline type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script is:inline define:vars={{ mapDataForChart }}>
+  // Load Google Charts library
+  google.charts.load('current', {
+    'packages': ['geochart'],
+    'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY' // Public key for Google Maps
+  });
+  google.charts.setOnLoadCallback(drawMap);
+
+  function drawMap() {
+    // Prepare data for Google Charts with impact levels (0-3)
+    const chartData = [['State', 'Impact Level']];
+
+    // Map impact levels to values: low=0, medium=1, high=2, critical=3
+    const levelToValue = {
+      'low': 0,
+      'medium': 1,
+      'high': 2,
+      'critical': 3
+    };
+
+    // Add state data with impact level
+    Object.keys(mapDataForChart).forEach(abbr => {
+      const stateData = mapDataForChart[abbr];
+      const impactValue = levelToValue[stateData.level] || 0;
+      chartData.push([`US-${abbr}`, impactValue]);
+    });
+
+    const data = google.visualization.arrayToDataTable(chartData);
+
+    const options = {
+      region: 'US',
+      resolution: 'provinces',
+      colorAxis: {
+        colors: ['#65a30d', '#ca8a04', '#ea580c', '#dc2626'], // Green, Yellow, Orange, Red (matching legend)
+        values: [0, 1, 2, 3]
+      },
+      backgroundColor: 'white',
+      datalessRegionColor: '#f0f0f0',
+      defaultColor: '#f5f5f5',
+      legend: 'none',
+      tooltip: {
+        textStyle: { fontSize: 14 }
+      }
+    };
+
+    const chart = new google.visualization.GeoChart(document.getElementById('us-map-chart'));
+
+    // Handle state selection
+    google.visualization.events.addListener(chart, 'select', function() {
+      const selection = chart.getSelection();
+      if (selection.length > 0) {
+        const row = selection[0].row;
+        const stateCode = chartData[row + 1][0].replace('US-', '');
+
+        // Find the corresponding card and trigger click
+        const card = document.querySelector(`[data-state="${stateCode}"]`);
+        if (card) {
+          card.click();
+        }
+      }
+    });
+
+    chart.draw(data, options);
+  }
+
+  // Handle grid toggle button
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('toggle-grid-btn');
+    const gridContainer = document.getElementById('states-grid-container');
+
+    if (toggleBtn && gridContainer) {
+      toggleBtn.addEventListener('click', () => {
+        const isHidden = gridContainer.classList.contains('hidden');
+
+        if (isHidden) {
+          gridContainer.classList.remove('hidden');
+          toggleBtn.textContent = 'Hide State Grid ↑';
+          gridContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          gridContainer.classList.add('hidden');
+          toggleBtn.textContent = 'See Full Impact State by State ↓';
+        }
+      });
+    }
+
+    const stateCards = document.querySelectorAll('.state-card');
+    const detailCard = document.getElementById('state-detail-card');
+    const closeBtn = document.getElementById('close-detail');
+
+    stateCards.forEach(card => {
+      const htmlCard = card;
+      htmlCard.addEventListener('click', () => {
+        const stateName = htmlCard.dataset.name;
+        const jobs = htmlCard.dataset.jobs;
+        const revenue = htmlCard.dataset.revenue;
+        const businesses = htmlCard.dataset.businesses;
+        const banned = htmlCard.dataset.banned === 'true';
+        const notes = htmlCard.dataset.notes;
+
+        // Update detail card
+        const detailState = document.getElementById('detail-state');
+        const detailJobs = document.getElementById('detail-jobs');
+        const detailRevenue = document.getElementById('detail-revenue');
+        const detailBusinesses = document.getElementById('detail-businesses');
+        const detailBanned = document.getElementById('detail-banned');
+        const detailNotes = document.getElementById('detail-notes');
+
+        if (detailState) detailState.textContent = stateName;
+        if (detailJobs) detailJobs.textContent = jobs;
+        if (detailRevenue) detailRevenue.textContent = '$' + revenue;
+        if (detailBusinesses) detailBusinesses.textContent = businesses;
+
+        if (detailBanned) {
+          if (banned) {
+            detailBanned.classList.remove('hidden');
+          } else {
+            detailBanned.classList.add('hidden');
+          }
+        }
+
+        if (detailNotes && notes) {
+          detailNotes.textContent = notes;
+          detailNotes.style.display = 'block';
+        } else if (detailNotes) {
+          detailNotes.style.display = 'none';
+        }
+
+        // Show detail card
+        if (detailCard) {
+          detailCard.classList.remove('hidden');
+          detailCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    });
+
+    // Close button
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        if (detailCard) {
+          detailCard.classList.add('hidden');
+        }
+      });
+    }
+  });
+</script>

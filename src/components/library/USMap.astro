@@ -1,0 +1,401 @@
+---
+/**
+ * Interactive US Map Component with state-level data visualization
+ * Uses actual US state SVG paths for proper geographic representation
+ */
+
+import { getStateData, getImpactLevel, getImpactColor, formatJobs, formatRevenue } from '../../utils/stateData';
+
+// Build state data for client-side access
+const stateDataMap: Record<string, any> = {};
+const stateAbbrs = [
+  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+  'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+  'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+  'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+  'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+];
+
+for (const abbr of stateAbbrs) {
+  const data = getStateData(abbr);
+  if (data) {
+    const level = getImpactLevel(data);
+    stateDataMap[abbr] = {
+      name: data.state_name,
+      jobs: formatJobs(data.jobs_at_risk || data.jobs_current),
+      revenue: formatRevenue(data.revenue_annual),
+      businesses: data.hemp_businesses || 'N/A',
+      color: getImpactColor(level),
+      level: level,
+      banned: !!data.ban_status,
+      notes: data.notes || ''
+    };
+  }
+}
+---
+
+<div class="us-map-container">
+  <!-- Map Header -->
+  <div class="map-header text-center mb-8">
+    <h3 class="text-2xl md:text-3xl font-bold mb-4" style="color: var(--color-soil-dark);">
+      Hemp Industry Impact Across America
+    </h3>
+    <p class="text-lg text-neutral-600 mb-6">
+      Click or tap any state to see the economic impact in your area
+    </p>
+
+    <!-- Legend -->
+    <div class="flex flex-wrap justify-center gap-3 md:gap-6 text-xs md:text-sm">
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded" style="background-color: #dc2626;"></div>
+        <span class="whitespace-nowrap">Critical Impact</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded" style="background-color: #ea580c;"></div>
+        <span class="whitespace-nowrap">High Impact</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded" style="background-color: #ca8a04;"></div>
+        <span class="whitespace-nowrap">Medium Impact</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded" style="background-color: #65a30d;"></div>
+        <span class="whitespace-nowrap">Lower Impact</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Display (Mobile-friendly) -->
+  <div id="state-info-card" class="state-info-card hidden">
+    <button id="close-info" class="close-btn" aria-label="Close">✕</button>
+    <div id="info-banned" class="banned-badge hidden">⚠️ ALREADY BANNED</div>
+    <h4 id="info-state" class="font-bold text-2xl mb-4" style="color: var(--color-soil-dark);"></h4>
+    <div class="space-y-3">
+      <div class="info-row">
+        <span class="info-label">Jobs at Risk:</span>
+        <span id="info-jobs" class="info-value"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Annual Revenue:</span>
+        <span id="info-revenue" class="info-value"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Hemp Businesses:</span>
+        <span id="info-businesses" class="info-value"></span>
+      </div>
+    </div>
+    <div id="info-notes" class="mt-4 text-sm text-neutral-600 italic"></div>
+  </div>
+
+  <!-- Desktop Tooltip -->
+  <div id="map-tooltip" class="map-tooltip hidden">
+    <div class="font-semibold text-lg" id="tooltip-state"></div>
+    <div class="text-sm mt-1">Click to see details</div>
+  </div>
+
+  <!-- Interactive Map Canvas -->
+  <div class="map-canvas-wrapper">
+    <div id="map-canvas" class="map-canvas">
+      <!-- States will be dynamically inserted here -->
+    </div>
+  </div>
+</div>
+
+<style>
+  .us-map-container {
+    position: relative;
+    padding: 1rem 0;
+  }
+
+  .map-canvas-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  .map-canvas {
+    width: 100%;
+    min-height: 500px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    position: relative;
+    overflow: visible;
+    padding: 2rem;
+  }
+
+  .state-box {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    position: relative;
+  }
+
+  .state-box:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    z-index: 10;
+  }
+
+  .state-abbr {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+
+  .state-info-card {
+    background: white;
+    border: 3px solid var(--color-hemp-green);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    position: relative;
+  }
+
+  .state-info-card.hidden {
+    display: none;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+  }
+
+  .close-btn:hover {
+    background: #f0f0f0;
+    color: #000;
+  }
+
+  .banned-badge {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  .banned-badge.hidden {
+    display: none;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .info-label {
+    font-weight: 600;
+    color: var(--color-soil-dark);
+  }
+
+  .info-value {
+    font-weight: 700;
+    color: var(--color-hemp-green);
+    text-align: right;
+  }
+
+  .map-tooltip {
+    position: fixed;
+    background: white;
+    border: 2px solid var(--color-hemp-green);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+    z-index: 1000;
+    white-space: nowrap;
+  }
+
+  .map-tooltip.hidden {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .map-tooltip {
+      display: none !important;
+    }
+
+    .state-info-card {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ stateDataMap }}>
+  // Initialize the map when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeMap();
+  });
+
+  function initializeMap() {
+    const canvas = document.getElementById('map-canvas');
+    if (!canvas) return;
+
+    // Create a simplified US map layout using CSS Grid with approximate state positions
+    // This creates a more map-like appearance than a simple alphabetical grid
+    const mapLayout = [
+      ['AK', '', '', '', '', '', '', '', 'ME', 'ME'],
+      ['', 'WA', 'MT', 'ND', 'MN', 'WI', 'MI', '', 'VT', 'NH'],
+      ['', 'OR', 'ID', 'WY', 'SD', 'IA', 'IL', 'IN', 'NY', 'MA'],
+      ['', 'CA', 'NV', 'UT', 'CO', 'NE', 'KS', 'MO', 'PA', 'RI'],
+      ['', 'CA', 'AZ', 'NM', 'OK', 'AR', 'TN', 'KY', 'WV', 'CT'],
+      ['', '', '', '', 'TX', 'LA', 'MS', 'AL', 'VA', 'NJ'],
+      ['HI', '', '', '', 'TX', '', '', 'GA', 'NC', 'DE'],
+      ['', '', '', '', '', '', '', 'FL', 'SC', 'MD'],
+      ['', '', '', '', '', '', '', 'FL', '', '']
+    ];
+
+    const grid = document.createElement('div');
+    grid.style.cssText = `
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 4px;
+      max-width: 1000px;
+      margin: 0 auto;
+    `;
+
+    // Create the grid
+    mapLayout.forEach(row => {
+      row.forEach(abbr => {
+        const cell = document.createElement('div');
+
+        if (abbr && stateDataMap[abbr]) {
+          const data = stateDataMap[abbr];
+          cell.className = 'state-box';
+          cell.style.backgroundColor = data.color;
+
+          cell.innerHTML = `
+            <div class="state-abbr">${abbr}</div>
+          `;
+
+          // Desktop hover tooltip
+          if (window.innerWidth > 768) {
+            cell.addEventListener('mouseenter', (e) => showTooltip(e, data.name));
+            cell.addEventListener('mousemove', (e) => moveTooltip(e));
+            cell.addEventListener('mouseleave', hideTooltip);
+          }
+
+          // Click to show details
+          cell.addEventListener('click', () => showStateInfo(abbr, data));
+        } else {
+          // Empty cell for spacing
+          cell.style.minHeight = '50px';
+        }
+
+        grid.appendChild(cell);
+      });
+    });
+
+    canvas.appendChild(grid);
+
+    // Close button handler
+    const closeBtn = document.getElementById('close-info');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', hideStateInfo);
+    }
+  }
+
+  function showTooltip(e, stateName) {
+    const tooltip = document.getElementById('map-tooltip');
+    const tooltipState = document.getElementById('tooltip-state');
+
+    if (tooltipState) tooltipState.textContent = stateName;
+
+    if (tooltip) {
+      tooltip.classList.remove('hidden');
+      moveTooltip(e);
+    }
+  }
+
+  function moveTooltip(e) {
+    const tooltip = document.getElementById('map-tooltip');
+    if (!tooltip || window.innerWidth <= 768) return;
+
+    tooltip.style.left = (e.clientX + 15) + 'px';
+    tooltip.style.top = (e.clientY + 15) + 'px';
+  }
+
+  function hideTooltip() {
+    const tooltip = document.getElementById('map-tooltip');
+    if (tooltip) {
+      tooltip.classList.add('hidden');
+    }
+  }
+
+  function showStateInfo(abbr, data) {
+    const infoCard = document.getElementById('state-info-card');
+    const infoState = document.getElementById('info-state');
+    const infoJobs = document.getElementById('info-jobs');
+    const infoRevenue = document.getElementById('info-revenue');
+    const infoBusinesses = document.getElementById('info-businesses');
+    const infoBanned = document.getElementById('info-banned');
+    const infoNotes = document.getElementById('info-notes');
+
+    if (infoState) infoState.textContent = data.name;
+    if (infoJobs) infoJobs.textContent = data.jobs;
+    if (infoRevenue) infoRevenue.textContent = data.revenue;
+    if (infoBusinesses) infoBusinesses.textContent = data.businesses;
+
+    if (infoBanned) {
+      if (data.banned) {
+        infoBanned.classList.remove('hidden');
+      } else {
+        infoBanned.classList.add('hidden');
+      }
+    }
+
+    if (infoNotes && data.notes) {
+      infoNotes.textContent = data.notes;
+      infoNotes.style.display = 'block';
+    } else if (infoNotes) {
+      infoNotes.style.display = 'none';
+    }
+
+    if (infoCard) {
+      infoCard.classList.remove('hidden');
+      infoCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  function hideStateInfo() {
+    const infoCard = document.getElementById('state-info-card');
+    if (infoCard) {
+      infoCard.classList.add('hidden');
+    }
+  }
+</script>
+---
+
+<parameter name="file_path">/Users/hilarytorn/01Git/stand-for-hemp/src/components/library/USMap.astro

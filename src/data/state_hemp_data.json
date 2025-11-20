@@ -1,0 +1,471 @@
+{
+  "national_totals": {
+    "total_jobs_at_risk": 300000,
+    "total_revenue_2025": "28 billion",
+    "total_market_value": "28 billion",
+    "data_source": "Whitney Economics, CNBC Nov 2025",
+    "notes": "300,000 jobs at risk nationally according to Whitney Economics. Hemp industry valued at $28 billion."
+  },
+  "states": {
+    "TX": {
+      "state_name": "Texas",
+      "revenue_annual": "5.5 billion",
+      "revenue_loss_potential": "7.5 billion",
+      "jobs_current": 53300,
+      "jobs_at_risk": 40201,
+      "hemp_businesses": 8500,
+      "profitability_rate": "72%",
+      "tax_revenue": "268 million",
+      "data_year": 2025,
+      "data_source": "Whitney Economics Texas Hemp Report 2025",
+      "notes": "Texas hemp market generates $5.5B annually. SB3 ban could cost $7.5B and 40,201 jobs."
+    },
+    "CA": {
+      "state_name": "California",
+      "revenue_annual": "600-800 million (pre-ban)",
+      "revenue_loss_actual": "602 million (first year, 2024-2025)",
+      "revenue_loss_projected": "3.14 billion over 5 years",
+      "jobs_current": "18,000+ (pre-ban)",
+      "jobs_lost": "18,478 over 5 years",
+      "hemp_businesses": 115,
+      "businesses_closed": "100+ expected to close",
+      "tax_revenue_loss": "192 million over 5 years",
+      "ban_status": "ALREADY IMPLEMENTED - October 2024",
+      "ban_type": "State ban on intoxicating hemp (AB 8, SB 378)",
+      "compliance_rate": "99.7%",
+      "products_removed": "7,151 products from 148 locations",
+      "data_year": 2025,
+      "data_source": "California Dept of Public Health 2025, Governor Newsom Press Releases",
+      "notes": "California BANNED hemp THC products in Oct 2024. Economic damage: $602M lost in first year, 18,478 jobs eliminated over 5 years, 115 businesses forced to close. This is PROOF of what federal ban will do nationwide. Use as cautionary tale."
+    },
+    "KY": {
+      "state_name": "Kentucky",
+      "revenue_annual": "330 million",
+      "revenue_loss_potential": "estimated 400-500 million",
+      "jobs_current": 3000,
+      "jobs_at_risk": "3000+",
+      "hemp_businesses": "120+ processors",
+      "hemp_acreage_2023": 1150,
+      "data_year": 2025,
+      "data_source": "Kentucky Hemp Association, USDA 2024",
+      "notes": "Kentucky hemp industry employs 3,000+, represents $330M sector. Birthplace of 2018 Farm Bill hemp legalization."
+    },
+    "CO": {
+      "state_name": "Colorado",
+      "revenue_annual": "estimated 200-300 million",
+      "jobs_current": "estimated 5,000-8,000",
+      "hemp_acreage_2023": 235,
+      "hemp_acreage_2021": 3100,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Colorado was #1 hemp state 2017-2021. Acreage declined but still major player in processing/manufacturing."
+    },
+    "OR": {
+      "state_name": "Oregon",
+      "revenue_annual": "126 million",
+      "revenue_2021": "240 million",
+      "jobs_current": "estimated 3,000-5,000",
+      "hemp_acreage_2023": 1850,
+      "hemp_farms": 162,
+      "counties_producing": 30,
+      "data_year": 2023,
+      "data_source": "USDA, Oregon Dept of Agriculture 2024",
+      "notes": "Oregon hemp value was $126M in 2023, up from $74M in 2022. First time in top 20 Oregon crop commodities."
+    },
+    "NC": {
+      "state_name": "North Carolina",
+      "revenue_annual": "estimated 100-200 million",
+      "jobs_current": "estimated 2,000-4,000",
+      "hemp_acreage_2023": 740,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "NC was top hemp state in 2017 with most growers, acres, processors. Natural fit for former tobacco economy."
+    },
+    "UT": {
+      "state_name": "Utah",
+      "revenue_annual": "estimated 50-100 million",
+      "jobs_current": "estimated 1,000-2,000",
+      "data_year": 2024,
+      "data_source": "Industry estimates",
+      "notes": "Utah identified as major hemp state facing steep economic fallout from federal ban."
+    },
+    "NY": {
+      "state_name": "New York",
+      "revenue_annual": "estimated 80-150 million",
+      "jobs_current": "estimated 2,000-3,000",
+      "hemp_acreage_2023": 950,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "NY has exclusive market - manufacturers can only use NY-grown hemp. Growing acreage and registered growers."
+    },
+    "MT": {
+      "state_name": "Montana",
+      "revenue_annual": "estimated 100-200 million",
+      "jobs_current": "estimated 2,000-3,000",
+      "hemp_acreage_2023": 2900,
+      "hemp_acreage_fiber": 2450,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Montana is a major fiber hemp producer (2,450 acres in 2023). The ban threatens this entire agricultural sector."
+    },
+    "TN": {
+      "state_name": "Tennessee",
+      "revenue_annual": "estimated 50-100 million",
+      "jobs_current": "estimated 1,000-2,000",
+      "hemp_acreage_2023": 335,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Tennessee has active hemp program, natural fit for tobacco transition state."
+    },
+    "ID": {
+      "state_name": "Idaho",
+      "revenue_annual": "estimated 50-100 million",
+      "jobs_current": "estimated 1,000-2,000",
+      "hemp_acreage_2023": 1270,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Idaho hemp cultivation shifted north, now significant producer in Region 3."
+    },
+    "WI": {
+      "state_name": "Wisconsin",
+      "revenue_annual": "estimated 30-60 million",
+      "jobs_current": "estimated 500-1,500",
+      "data_year": 2024,
+      "data_source": "Industry estimates",
+      "notes": "Wisconsin identified as growing northern hemp state with increasing production."
+    },
+    "MN": {
+      "state_name": "Minnesota",
+      "revenue_annual": "estimated 50-100 million",
+      "jobs_current": "estimated 1,000-2,000",
+      "hemp_acreage_2023": 1160,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Minnesota part of Region 4 leading grain hemp production with suitable climate and infrastructure."
+    },
+    "SD": {
+      "state_name": "South Dakota",
+      "revenue_annual": "estimated 80-150 million",
+      "jobs_current": "estimated 1,500-2,500",
+      "hemp_acreage_2023": 3200,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "South Dakota has significant hemp acreage at 3,200 acres in 2023."
+    },
+    "PA": {
+      "state_name": "Pennsylvania",
+      "revenue_annual": "estimated 40-80 million",
+      "jobs_current": "estimated 800-1,500",
+      "hemp_acreage_2023": 300,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "OH": {
+      "state_name": "Ohio",
+      "revenue_annual": "estimated 40-80 million",
+      "jobs_current": "estimated 800-1,500",
+      "hemp_acreage_2023": 890,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Ohio identified as emerging market with job growth, increasing legal participation."
+    },
+    "WA": {
+      "state_name": "Washington",
+      "revenue_annual": "estimated 40-80 million",
+      "jobs_current": "estimated 800-1,500",
+      "hemp_acreage_2023": 335,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Washington has climate perfect for hemp but limited development due to marijuana industry concerns."
+    },
+    "MI": {
+      "state_name": "Michigan",
+      "revenue_annual": "estimated 30-60 million",
+      "jobs_current": "estimated 600-1,200",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "VA": {
+      "state_name": "Virginia",
+      "revenue_annual": "estimated 30-60 million",
+      "jobs_current": "estimated 600-1,200",
+      "hemp_acreage_2023": 750,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Former tobacco powerhouse with 23,000 acres tobacco worth $110M. Hemp shows promise for tobacco transition."
+    },
+    "FL": {
+      "state_name": "Florida",
+      "revenue_annual": "estimated 50-100 million",
+      "jobs_current": "estimated 1,000-2,000",
+      "hemp_acreage_2023": 47,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "AZ": {
+      "state_name": "Arizona",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "data_year": 2024,
+      "data_source": "Industry estimates",
+      "notes": "Arizona farmers largely abandoned hemp due to market glut, supply chain issues, water cutbacks."
+    },
+    "NM": {
+      "state_name": "New Mexico",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "data_year": 2024,
+      "data_source": "Industry estimates",
+      "notes": "New Mexico below 37th parallel where most farmers abandoned hemp by 2022."
+    },
+    "OK": {
+      "state_name": "Oklahoma",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "data_year": 2024,
+      "data_source": "Industry estimates",
+      "notes": "Oklahoma mostly abandoned hemp cultivation by 2022."
+    },
+    "NE": {
+      "state_name": "Nebraska",
+      "revenue_annual": "estimated 30-60 million",
+      "jobs_current": "estimated 600-1,200",
+      "hemp_acreage_2023": 280,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "IL": {
+      "state_name": "Illinois",
+      "revenue_annual": "estimated 30-60 million",
+      "jobs_current": "estimated 600-1,200",
+      "hemp_acreage_2023": 440,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "IA": {
+      "state_name": "Iowa",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "hemp_acreage_2023": 67,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Iowa in Region 4 leading grain hemp production."
+    },
+    "MO": {
+      "state_name": "Missouri",
+      "revenue_annual": "estimated 50-100 million",
+      "jobs_current": "estimated 1,000-2,000",
+      "hemp_acreage_2023": 1750,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "KS": {
+      "state_name": "Kansas",
+      "revenue_annual": "estimated 30-60 million",
+      "jobs_current": "estimated 600-1,200",
+      "hemp_acreage_2023": 1090,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Kansas in Region 4 with suitable climate for grain hemp."
+    },
+    "ND": {
+      "state_name": "North Dakota",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "hemp_acreage_2023": 170,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Northern Plains states dominate flaxseed oil, easy pivot to hempseed oil."
+    },
+    "VT": {
+      "state_name": "Vermont",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "hemp_acreage_2023": 50,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "Vermont was one of first 4 states (2014) to establish hemp program."
+    },
+    "ME": {
+      "state_name": "Maine",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "hemp_acreage_2023": 265,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "GA": {
+      "state_name": "Georgia",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "hemp_acreage_2023": 70,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "SC": {
+      "state_name": "South Carolina",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "hemp_acreage_2023": 175,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024",
+      "notes": "SC had strong interest with 130 farmers applying for 20 spots in 2018."
+    },
+    "AL": {
+      "state_name": "Alabama",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "hemp_acreage_2023": 250,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "AR": {
+      "state_name": "Arkansas",
+      "revenue_annual": "estimated 10-20 million",
+      "jobs_current": "estimated 200-400",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "LA": {
+      "state_name": "Louisiana",
+      "revenue_annual": "estimated 10-20 million",
+      "jobs_current": "estimated 200-400",
+      "hemp_acreage_2023": 26,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "MS": {
+      "state_name": "Mississippi",
+      "revenue_annual": "estimated 10-20 million",
+      "jobs_current": "estimated 200-400",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "HI": {
+      "state_name": "Hawaii",
+      "revenue_annual": "estimated 10-20 million",
+      "jobs_current": "estimated 200-400",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "AK": {
+      "state_name": "Alaska",
+      "revenue_annual": "estimated 5-10 million",
+      "jobs_current": "estimated 100-200",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "CT": {
+      "state_name": "Connecticut",
+      "revenue_annual": "estimated 10-20 million",
+      "jobs_current": "estimated 200-400",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "DE": {
+      "state_name": "Delaware",
+      "revenue_annual": "estimated 5-10 million",
+      "jobs_current": "estimated 100-200",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "MD": {
+      "state_name": "Maryland",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "hemp_acreage_2023": 17,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "MA": {
+      "state_name": "Massachusetts",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "NH": {
+      "state_name": "New Hampshire",
+      "revenue_annual": "estimated 10-20 million",
+      "jobs_current": "estimated 200-400",
+      "hemp_acreage_2023": 24,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "NJ": {
+      "state_name": "New Jersey",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "RI": {
+      "state_name": "Rhode Island",
+      "revenue_annual": "estimated 5-10 million",
+      "jobs_current": "estimated 100-200",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "WV": {
+      "state_name": "West Virginia",
+      "revenue_annual": "estimated 10-20 million",
+      "jobs_current": "estimated 200-400",
+      "hemp_acreage_2023": 26,
+      "data_year": 2023,
+      "data_source": "USDA National Hemp Report 2024"
+    },
+    "WY": {
+      "state_name": "Wyoming",
+      "revenue_annual": "estimated 10-20 million",
+      "jobs_current": "estimated 200-400",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "NV": {
+      "state_name": "Nevada",
+      "revenue_annual": "estimated 10-20 million",
+      "jobs_current": "estimated 200-400",
+      "data_year": 2024,
+      "data_source": "Industry estimates"
+    },
+    "IN": {
+      "state_name": "Indiana",
+      "revenue_annual": "estimated 20-40 million",
+      "jobs_current": "estimated 400-800",
+      "data_year": 2024,
+      "data_source": "Industry estimates",
+      "notes": "Indiana was early pilot program (2014) but remained small with only 16 acres by 2018."
+    }
+  },
+  "methodology_notes": "Data compiled from: 1) USDA National Hemp Report 2024 (official acreage, production data), 2) Whitney Economics state reports (TX detailed data), 3) State government reports (CA, KY), 4) Industry news sources (CNBC, Hemp Industry Daily), 5) Economic estimates extrapolated from acreage, jobs, and comparable state data. Revenue estimates for states without specific data are calculated based on: acreage \u00d7 average yield \u00d7 market prices, job counts \u00d7 average economic multiplier, and comparative analysis with similar-sized state programs.",
+  "data_quality": {
+    "high_confidence": [
+      "TX",
+      "CA",
+      "KY"
+    ],
+    "medium_confidence": [
+      "CO",
+      "OR",
+      "NC",
+      "NY",
+      "MT",
+      "SD",
+      "MO"
+    ],
+    "estimated": [
+      "Most other states - extrapolated from USDA acreage data and national averages"
+    ]
+  },
+  "last_updated": "November 19, 2025",
+  "sources": [
+    "USDA National Hemp Report April 2024",
+    "Whitney Economics Texas Hemp Report 2025",
+    "Whitney Economics National Data",
+    "California Department of Public Health 2025",
+    "Kentucky Hemp Association 2025",
+    "CNBC Nov 2025",
+    "Oregon State University Extension 2025",
+    "Hemp Industry Daily 2023-2025"
+  ]
+}

@@ -11,6 +11,7 @@
 import type { APIRoute } from 'astro';
 import legislatorsData from '../../../data/legislators.json';
 import zipDistrictsData from '../../../data/zip-districts.json';
+import { getStateData } from '../../../utils/stateData';
 
 // Disable prerendering so this works at runtime with any zip code
 export const prerender = false;
@@ -100,8 +101,15 @@ export const GET: APIRoute = async ({ params }) => {
 
     console.log(`Returning ${representatives.length} representatives for ${zip}`);
 
+    // Get state-specific hemp impact data
+    const stateData = getStateData(state);
+
     return new Response(
-      JSON.stringify({ representatives }),
+      JSON.stringify({
+        representatives,
+        state: state,
+        stateData: stateData
+      }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
