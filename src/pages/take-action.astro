@@ -125,6 +125,67 @@ import LandingLayout from '../layouts/LandingLayout.astro';
     </div>
   </section>
 
+  <!-- Message Template Section -->
+  <section id="message-template-section" class="py-16 bg-gradient-to-br from-[var(--color-soft-cream)] to-white hidden">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--color-soil-dark);">
+          Your Personalized Message
+        </h2>
+        <p class="text-lg text-neutral-600 mb-6">
+          Choose your role and we'll generate a message you can copy and paste
+        </p>
+      </div>
+
+      <!-- Role Selector -->
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+        <button
+          class="role-btn active"
+          data-role="consumer"
+          style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: var(--color-hemp-green); color: white;"
+        >
+          I'm a Consumer
+        </button>
+        <button
+          class="role-btn"
+          data-role="farmer"
+          style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: white; color: var(--color-hemp-green);"
+        >
+          I'm a Farmer
+        </button>
+        <button
+          class="role-btn"
+          data-role="industry"
+          style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: white; color: var(--color-hemp-green);"
+        >
+          I Work in Hemp Industry
+        </button>
+      </div>
+
+      <!-- Message Display -->
+      <div class="card" style="background: white; border: 2px solid var(--color-hemp-green);">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold" style="color: var(--color-soil-dark);">Your Message:</h3>
+          <button
+            id="copy-message-btn"
+            class="px-4 py-2 rounded-lg font-semibold transition-all"
+            style="background-color: var(--color-hemp-green); color: white; border: none;"
+          >
+            📋 Copy Message
+          </button>
+        </div>
+        <div
+          id="message-content"
+          class="p-4 rounded-lg text-left whitespace-pre-line"
+          style="background-color: #f9fafb; border: 1px solid #e5e7eb; font-family: inherit; line-height: 1.6;"
+        ></div>
+        <div id="copy-success" class="hidden mt-4 text-center font-semibold" style="color: var(--color-hemp-green);">
+          ✓ Message copied to clipboard!
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Representatives List -->
   <section id="reps-section" class="py-16 bg-white hidden">
     <div class="container mx-auto px-6 max-w-5xl">
@@ -133,14 +194,108 @@ import LandingLayout from '../layouts/LandingLayout.astro';
           Your Representatives
         </h2>
         <p class="text-lg text-neutral-600">
-          Contact them to save the hemp industry
+          Use the message above when contacting them
         </p>
       </div>
 
       <!-- Representatives will be inserted here -->
       <div id="reps-container" class="space-y-8"></div>
+
+      <!-- Social Sharing Section -->
+      <div class="mt-16 text-center">
+        <div class="card" style="background: white; border: 2px solid var(--color-hemp-green);">
+          <h3 class="text-2xl md:text-3xl font-bold mb-4" style="color: var(--color-soil-dark);">
+            Spread the Word
+          </h3>
+          <p class="text-lg text-neutral-600 mb-8">
+            Share this campaign and help save the hemp industry
+          </p>
+
+          <div class="flex justify-center gap-4 flex-wrap">
+            <button
+              id="share-twitter"
+              class="share-icon-btn"
+              aria-label="Share on Twitter"
+              title="Share on Twitter/X"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </button>
+            <button
+              id="share-facebook"
+              class="share-icon-btn"
+              aria-label="Share on Facebook"
+              title="Share on Facebook"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </button>
+            <button
+              id="share-linkedin"
+              class="share-icon-btn"
+              aria-label="Share on LinkedIn"
+              title="Share on LinkedIn"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </button>
+            <button
+              id="copy-link"
+              class="share-icon-btn"
+              aria-label="Copy link"
+              title="Copy link to clipboard"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div id="link-copied" class="hidden mt-6 font-semibold" style="color: var(--color-hemp-green);">
+            ✓ Link copied to clipboard!
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <style>
+    .share-icon-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--color-hemp-green);
+      background-color: white;
+      color: var(--color-hemp-green);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .share-icon-btn:hover {
+      background-color: var(--color-hemp-green);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(74, 103, 65, 0.3);
+    }
+
+    .share-icon-btn:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      .share-icon-btn {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  </style>
 
   <!-- Representative Card Template -->
   <template id="rep-card-template">
@@ -201,9 +356,14 @@ import LandingLayout from '../layouts/LandingLayout.astro';
     const errorState = document.getElementById('error-state');
     const errorMessage = document.getElementById('error-message');
     const stateImpactSection = document.getElementById('state-impact-section');
+    const messageTemplateSection = document.getElementById('message-template-section');
     const repsSection = document.getElementById('reps-section');
     const repsContainer = document.getElementById('reps-container');
     const repCardTemplate = document.getElementById('rep-card-template');
+
+    // Store current state data globally for template generation
+    let currentStateData = null;
+    let currentStateName = '';
 
     // Debug logging
     console.log('Zip from URL:', zipFromUrl);
@@ -235,6 +395,7 @@ import LandingLayout from '../layouts/LandingLayout.astro';
       loadingState?.classList.remove('hidden');
       errorState?.classList.add('hidden');
       stateImpactSection?.classList.add('hidden');
+      messageTemplateSection?.classList.add('hidden');
       repsSection?.classList.add('hidden');
 
       try {
@@ -262,6 +423,10 @@ import LandingLayout from '../layouts/LandingLayout.astro';
           throw new Error('No representatives found for this zip code. Please try a different zip code.');
         }
 
+        // Store state data for template generation
+        currentStateData = stateData;
+        currentStateName = stateName;
+
         // Display state impact data
         if (stateData) {
           displayStateData(stateData, stateName);
@@ -270,11 +435,15 @@ import LandingLayout from '../layouts/LandingLayout.astro';
         // Display representatives
         displayRepresentatives(representatives);
 
+        // Initialize message template
+        initializeMessageTemplate();
+
         // Hide loading, show results
         loadingState?.classList.add('hidden');
         if (stateData) {
           stateImpactSection?.classList.remove('hidden');
         }
+        messageTemplateSection?.classList.remove('hidden');
         repsSection?.classList.remove('hidden');
 
         // Scroll to state impact section
@@ -460,5 +629,229 @@ import LandingLayout from '../layouts/LandingLayout.astro';
         alert(`Contact form not available for ${rep.name}. Please try calling instead: ${rep.phone || 'No phone number available'}`);
       }
     }
+
+    /**
+     * Initialize message template system
+     */
+    function initializeMessageTemplate() {
+      const roleButtons = document.querySelectorAll('.role-btn');
+      const messageContent = document.getElementById('message-content');
+      const copyBtn = document.getElementById('copy-message-btn');
+      const copySuccess = document.getElementById('copy-success');
+
+      let currentRole = 'consumer';
+
+      // Generate initial message
+      updateMessage(currentRole);
+
+      // Role button handlers
+      roleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active state
+          roleButtons.forEach(b => {
+            b.classList.remove('active');
+            b.style.backgroundColor = 'white';
+            b.style.color = 'var(--color-hemp-green)';
+          });
+          btn.classList.add('active');
+          btn.style.backgroundColor = 'var(--color-hemp-green)';
+          btn.style.color = 'white';
+
+          // Update message
+          currentRole = btn.dataset.role;
+          updateMessage(currentRole);
+        });
+      });
+
+      // Copy button handler
+      if (copyBtn && messageContent) {
+        copyBtn.addEventListener('click', async () => {
+          const message = messageContent.textContent;
+          try {
+            await navigator.clipboard.writeText(message);
+            if (copySuccess) {
+              copySuccess.classList.remove('hidden');
+              setTimeout(() => {
+                copySuccess.classList.add('hidden');
+              }, 3000);
+            }
+          } catch (err) {
+            console.error('Failed to copy:', err);
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = message;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            if (copySuccess) {
+              copySuccess.classList.remove('hidden');
+              setTimeout(() => {
+                copySuccess.classList.add('hidden');
+              }, 3000);
+            }
+          }
+        });
+      }
+
+      function updateMessage(role) {
+        if (!messageContent || !currentStateData) return;
+
+        // Get state stats
+        const stateName = currentStateData.state_name || currentStateName;
+        let jobs = currentStateData.jobs_at_risk || currentStateData.jobs_current || 'thousands';
+        if (typeof jobs === 'number') {
+          jobs = jobs.toLocaleString();
+        } else if (typeof jobs === 'string') {
+          jobs = jobs.replace(/^estimated\s+/i, '');
+        }
+
+        let revenue = currentStateData.revenue_annual || 'millions';
+        if (revenue !== 'N/A' && revenue !== 'millions') {
+          revenue = revenue.replace(/^estimated\s+/i, '');
+        }
+
+        const businesses = currentStateData.hemp_businesses || 'many';
+
+        // Generate message based on role
+        let message = '';
+
+        if (role === 'consumer') {
+          message = `Dear Representative,
+
+I am writing to you as a constituent and consumer of hemp products to express my urgent concern about the Farm Bill's restrictions on hemp-derived products.
+
+IN ${stateName.toUpperCase()}, THIS BAN WILL IMPACT:
+• ${jobs} jobs at risk
+• $${revenue} in annual revenue threatened
+• ${businesses} hemp businesses facing closure
+
+I support reasonable regulation of hemp products, but this ban KILLS the industry rather than protecting consumers. The Farm Bill's restrictions on "total THC" (including Delta-8, Delta-10, THCa) and the 0.4mg per package limit will eliminate products that millions of Americans rely on for wellness, including gummies, vapes, drinks, and topicals.
+
+This ban:
+• Takes effect November 12, 2026 (bill signed November 12, 2025)
+• Overrides state laws that have already regulated hemp successfully
+• Eliminates jobs and businesses without addressing real safety concerns
+
+I urge you to support REGULATION, not PROHIBITION. Work with the industry to create sensible standards that protect consumers while preserving this legal, growing sector of our economy.
+
+Please vote to amend the Farm Bill to allow states to regulate hemp products as they see fit, or support legislation that establishes federal standards without eliminating the entire industry.
+
+Thank you for your time and consideration.`;
+        } else if (role === 'farmer') {
+          message = `Dear Representative,
+
+I am writing to you as a hemp farmer in ${stateName} to express my urgent concern about the Farm Bill's devastating impact on hemp agriculture.
+
+IN ${stateName.toUpperCase()}, THIS BAN WILL IMPACT:
+• ${jobs} agricultural and industry jobs at risk
+• $${revenue} in annual revenue from hemp farming and processing
+• ${businesses} hemp businesses that depend on our crops
+
+The Farm Bill's restrictions on hemp-derived products will destroy the market for hemp crops overnight. As a farmer, I have invested in equipment, land, and expertise to grow legal hemp under the 2018 Farm Bill. This new ban eliminates the downstream market for our crops.
+
+This ban:
+• Takes effect November 12, 2026 (bill signed November 12, 2025)
+• Defines "total THC" to include Delta-8, Delta-10, THCa, making most hemp crops non-compliant
+• Sets a 0.4mg per package limit that eliminates all viable hemp product markets
+• Bans gummies, vapes, drinks, and topicals - the primary markets for hemp farmers
+
+I support reasonable regulation, but this ban KILLS our farms and our livelihoods. Hemp farmers have operated legally and invested millions based on the 2018 Farm Bill framework. This sudden prohibition betrays that trust.
+
+Please vote to amend the Farm Bill to protect hemp farmers and allow states to regulate hemp products. We need REGULATION, not PROHIBITION.
+
+Thank you for supporting American agriculture.`;
+        } else if (role === 'industry') {
+          message = `Dear Representative,
+
+I am writing to you as an employee in the hemp industry in ${stateName} to express my urgent concern about the Farm Bill's impact on my job and livelihood.
+
+IN ${stateName.toUpperCase()}, THIS BAN WILL IMPACT:
+• ${jobs} jobs like mine at immediate risk
+• $${revenue} in annual economic activity
+• ${businesses} hemp businesses facing closure
+
+I work in a legal, regulated industry that provides good jobs and quality products to millions of Americans. The Farm Bill's restrictions will eliminate my job and destroy an entire sector of our economy.
+
+This ban:
+• Takes effect November 12, 2026 (bill signed November 12, 2025)
+• Eliminates products through "total THC" restrictions and 0.4mg limits
+• Bans gummies, vapes, drinks, and topicals that our customers rely on
+• Overrides state regulations that were already working
+
+Our industry supports REGULATION - we want quality standards, testing requirements, and consumer protections. But this ban KILLS our jobs instead of creating a safer marketplace.
+
+This is not about opposing regulation. This is about preserving legal businesses, protecting jobs, and respecting states' rights to regulate hemp as they see fit.
+
+Please vote to amend the Farm Bill to support regulation rather than prohibition. Allow states to create their own hemp standards, or work with industry to develop federal standards that protect consumers without eliminating an entire legal market.
+
+My job, my colleagues' jobs, and thousands of jobs across ${stateName} depend on your action.
+
+Thank you for your consideration.`;
+        }
+
+        messageContent.textContent = message;
+      }
+    }
+
+    /**
+     * Initialize social sharing
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      const shareTwitter = document.getElementById('share-twitter');
+      const shareFacebook = document.getElementById('share-facebook');
+      const shareLinkedIn = document.getElementById('share-linkedin');
+      const copyLink = document.getElementById('copy-link');
+      const linkCopied = document.getElementById('link-copied');
+
+      const siteUrl = 'https://standforhemp.com';
+      const shareText = 'I just contacted my representatives to save the hemp industry. 300,000 jobs and $28B at risk. Join me at StandforHemp.com #SaveHemp';
+
+      if (shareTwitter) {
+        shareTwitter.addEventListener('click', () => {
+          const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(siteUrl)}`;
+          window.open(twitterUrl, '_blank', 'width=550,height=420');
+        });
+      }
+
+      if (shareFacebook) {
+        shareFacebook.addEventListener('click', () => {
+          const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(siteUrl)}&quote=${encodeURIComponent(shareText)}`;
+          window.open(facebookUrl, '_blank', 'width=550,height=420');
+        });
+      }
+
+      if (shareLinkedIn) {
+        shareLinkedIn.addEventListener('click', () => {
+          const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(siteUrl)}`;
+          window.open(linkedInUrl, '_blank', 'width=550,height=420');
+        });
+      }
+
+      if (copyLink && linkCopied) {
+        copyLink.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(siteUrl);
+            linkCopied.classList.remove('hidden');
+            setTimeout(() => {
+              linkCopied.classList.add('hidden');
+            }, 3000);
+          } catch (err) {
+            console.error('Failed to copy:', err);
+            // Fallback
+            const textArea = document.createElement('textarea');
+            textArea.value = siteUrl;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            linkCopied.classList.remove('hidden');
+            setTimeout(() => {
+              linkCopied.classList.add('hidden');
+            }, 3000);
+          }
+        });
+      }
+    });
   </script>
 </LandingLayout>

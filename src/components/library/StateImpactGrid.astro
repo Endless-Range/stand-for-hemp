@@ -395,6 +395,26 @@ for (const abbr of stateAbbrs) {
 
     const data = google.visualization.arrayToDataTable(chartData);
 
+    // Create custom tooltip data with state name and jobs (plain text, no HTML)
+    const dataView = new google.visualization.DataView(data);
+    dataView.setColumns([
+      0, // State code
+      1, // Impact value
+      {
+        type: 'string',
+        role: 'tooltip',
+        p: { html: false },
+        calc: function(dt, row) {
+          const stateCode = dt.getValue(row, 0).replace('US-', '');
+          const stateInfo = mapDataForChart[stateCode];
+          if (stateInfo) {
+            return stateInfo.name + '\nJobs at Risk: ' + stateInfo.jobs;
+          }
+          return '';
+        }
+      }
+    ]);
+
     const options = {
       region: 'US',
       resolution: 'provinces',
@@ -428,7 +448,7 @@ for (const abbr of stateAbbrs) {
       }
     });
 
-    chart.draw(data, options);
+    chart.draw(dataView, options);
   }
 
   // Handle grid toggle button
