@@ -70,7 +70,7 @@ import { Icon } from 'astro-icon/components';
 
       <!-- Social Proof -->
       <div class="text-white/80 text-sm md:text-base">
-        <p class="font-semibold text-lg">Join <span id="action-counter" class="text-[var(--color-wheat-gold)]">2,847</span> Americans taking action</p>
+        <p class="font-semibold text-lg">Join <span id="action-counter" class="text-[var(--color-wheat-gold)]">Loading...</span> Americans taking action</p>
       </div>
 
       <!-- Petition Link -->
@@ -347,33 +347,49 @@ import { Icon } from 'astro-icon/components';
       setInterval(updateCountdown, 1000);
     }
 
-    // Action counter animation on page load
+    // Action counter - fetch from API and add baseline
     const counter = document.getElementById('action-counter');
     if (counter) {
-      const targetNumber = 2847;
-      const duration = 2000; // 2 seconds
-      const increment = targetNumber / (duration / 16); // 60fps
-      let currentNumber = 0;
+      const BASELINE = 1487; // Starting baseline count
 
-      const updateCounter = () => {
-        currentNumber += increment;
-        if (currentNumber >= targetNumber) {
-          counter.textContent = targetNumber.toLocaleString();
-        } else {
-          counter.textContent = Math.floor(currentNumber).toLocaleString();
-          requestAnimationFrame(updateCounter);
-        }
+      const animateCounter = (targetNumber) => {
+        const duration = 2500; // 2.5 seconds for more visible animation
+        const startNumber = Math.max(0, targetNumber - 500); // Start from 500 below target (or 0)
+        const increment = (targetNumber - startNumber) / (duration / 16); // 60fps
+        let currentNumber = startNumber;
+
+        const updateCounter = () => {
+          currentNumber += increment;
+          if (currentNumber >= targetNumber) {
+            counter.textContent = targetNumber.toLocaleString();
+          } else {
+            counter.textContent = Math.floor(currentNumber).toLocaleString();
+            requestAnimationFrame(updateCounter);
+          }
+        };
+
+        // Start animation immediately
+        updateCounter();
       };
 
-      // Start animation when visible
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          updateCounter();
-          observer.disconnect();
-        }
-      });
-
-      observer.observe(counter);
+      // Fetch actual count from API
+      fetch('/api/stats')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('API not available');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const dbCount = data?.stats?.overall?.total_actions || 0;
+          const targetNumber = dbCount + BASELINE;
+          animateCounter(targetNumber);
+        })
+        .catch(error => {
+          console.log('Using baseline count (API not available in dev mode)');
+          // Use baseline if API fails (expected in dev mode)
+          animateCounter(BASELINE);
+        });
     }
   </script>
 </LandingLayout>

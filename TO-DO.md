@@ -74,20 +74,12 @@
 
 ### Core Development
 - [x] Build interactive state map with impact data
-- [ ] Create state-specific pages with local stats
+- [ ] Create state-specific pages with local stats (DEFERRED - SEO opportunity for future)
 - [x] Build About/Story page explaining the mission
-- [ ] Design shareable graphics for social media
-- [ ] Add graphics generator for milestones
-
-### Content Creation
-- [ ] Write state-specific copy for top states
-- [ ] Create social media graphic templates
-- [ ] Design infographics
 
 ### Success Criteria
 - [x] State map is interactive
 - [x] All 50 states have data
-- [ ] Graphics are shareable
 
 ---
 
@@ -221,32 +213,6 @@
 
 ---
 
-## 🔧 Technical Stack Checklist
-
-### Must-Have Day 1
-- [ ] Domain registered
-- [ ] Hosting set up
-- [ ] Project initialized with framework
-- [ ] GitHub repo created
-- [ ] Representative lookup API key
-- [ ] Database for counter
-- [ ] Analytics installed
-
-### Add By Day 2
-- [ ] AI API integrated for personalization
-- [ ] Social sharing functionality
-- [ ] Email template system
-
-### Add By Day 4
-- [ ] Automation platform account
-- [ ] Social media API access
-- [ ] Monitoring dashboard
-
-### Add By Day 5
-- [ ] Email service provider
-- [ ] SMS service (optional)
-- [ ] Contact database
-
 ---
 
 ## 🚨 Critical Reminders
@@ -287,24 +253,6 @@
 - [ ] Community of advocates engaged
 
 ---
-
-## 📞 Emergency Contacts & Resources
-
-### If Something Breaks
-- Check hosting provider status page
-- Check API status pages
-- Check database status page
-
-### Resources
-- Representative lookup API documentation
-- Framework documentation
-- CSS framework documentation
-- AI API documentation
-
-### Backup Plans
-- If primary API fails → Use backup API
-- If database fails → Use alternative or temporary storage
-- If automation fails → Manual posting for critical content
 
 ---
 
