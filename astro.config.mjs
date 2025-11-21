@@ -11,6 +11,7 @@ export default defineConfig({
   output: 'server', // Enable server-side rendering for API routes
   adapter: cloudflare(),
   site: 'https://standforhemp.com',
+  trailingSlash: 'always', // Enforce trailing slashes on all URLs
   integrations: [sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()]

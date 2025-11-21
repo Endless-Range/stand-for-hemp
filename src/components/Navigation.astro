@@ -1,0 +1,62 @@
+---
+/**
+ * Navigation Component - Reusable navigation bar for all pages
+ */
+---
+
+<nav class="bg-white border-b-2 border-neutral-200 sticky top-0 z-50">
+  <div class="container mx-auto px-6 py-4">
+    <div class="flex justify-between items-center">
+      <a href="/" class="flex items-center hover:opacity-80 transition-opacity">
+        <img src="/logo.png" alt="Stand for Hemp" class="h-12" />
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex gap-6 items-center">
+        <a href="/#impact-map" class="text-neutral-700 hover:text-[var(--color-hemp-green)] font-semibold transition-colors">
+          Impact Map
+        </a>
+        <a href="/blog/" class="text-neutral-700 hover:text-[var(--color-hemp-green)] font-semibold transition-colors">
+          Blog
+        </a>
+        <a href="/take-action/" class="px-4 py-2 rounded-lg font-semibold transition-all" style="background-color: var(--color-hemp-green); color: white;">
+          Take Action
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Toggle menu">
+        <svg class="w-6 h-6" style="color: var(--color-hemp-green);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+      <div class="flex flex-col gap-4">
+        <a href="/#impact-map" class="text-neutral-700 hover:text-[var(--color-hemp-green)] font-semibold transition-colors py-2">
+          Impact Map
+        </a>
+        <a href="/blog/" class="text-neutral-700 hover:text-[var(--color-hemp-green)] font-semibold transition-colors py-2">
+          Blog
+        </a>
+        <a href="/take-action/" class="px-4 py-3 rounded-lg font-semibold text-center transition-all" style="background-color: var(--color-hemp-green); color: white;">
+          Take Action
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+</script>

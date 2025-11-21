@@ -7,7 +7,9 @@
  */
 
 import LandingLayout from '../layouts/LandingLayout.astro';
+import Navigation from '../components/Navigation.astro';
 import StateImpactGrid from '../components/library/StateImpactGrid.astro';
+import { Icon } from 'astro-icon/components';
 ---
 
 <LandingLayout
@@ -15,6 +17,8 @@ import StateImpactGrid from '../components/library/StateImpactGrid.astro';
   description="The hemp ban will eliminate thousands of jobs and cost states hundreds of millions. Take action in 60 seconds - contact your representatives to save hemp."
   ogImage="/og-image.jpg"
 >
+  <Navigation />
+
   <!-- Hero Section - Dark gradient background -->
   <section class="hero-section relative overflow-hidden py-12 md:py-20">
     <!-- Background gradient -->
@@ -140,7 +144,7 @@ import StateImpactGrid from '../components/library/StateImpactGrid.astro';
   </section>
 
   <!-- State Impact Grid -->
-  <section class="pt-8 pb-16 md:pt-12 md:pb-24 bg-white">
+  <section id="impact-map" class="pt-8 pb-16 md:pt-12 md:pb-24 bg-white">
     <div class="container mx-auto px-6">
       <StateImpactGrid />
     </div>
@@ -156,7 +160,9 @@ import StateImpactGrid from '../components/library/StateImpactGrid.astro';
       <div class="grid md:grid-cols-2 gap-8 md:gap-12">
         <!-- Reason 1 -->
         <div class="card">
-          <div class="text-4xl mb-4">👨‍🌾</div>
+          <div class="mb-4">
+            <Icon name="fa6-solid:tractor" class="w-12 h-12" style="color: var(--color-hemp-green);" />
+          </div>
           <h3 class="text-2xl font-bold mb-3" style="color: var(--color-hemp-green);">
             American Farmers
           </h3>
@@ -167,7 +173,9 @@ import StateImpactGrid from '../components/library/StateImpactGrid.astro';
 
         <!-- Reason 2 -->
         <div class="card">
-          <div class="text-4xl mb-4">💰</div>
+          <div class="mb-4">
+            <Icon name="fa6-solid:hand-holding-dollar" class="w-12 h-12" style="color: var(--color-hemp-green);" />
+          </div>
           <h3 class="text-2xl font-bold mb-3" style="color: var(--color-hemp-green);">
             State Revenue
           </h3>
@@ -178,7 +186,9 @@ import StateImpactGrid from '../components/library/StateImpactGrid.astro';
 
         <!-- Reason 3 -->
         <div class="card">
-          <div class="text-4xl mb-4">🏥</div>
+          <div class="mb-4">
+            <Icon name="fa6-solid:heart-pulse" class="w-12 h-12" style="color: var(--color-hemp-green);" />
+          </div>
           <h3 class="text-2xl font-bold mb-3" style="color: var(--color-hemp-green);">
             Americans' Wellness
           </h3>
@@ -189,7 +199,9 @@ import StateImpactGrid from '../components/library/StateImpactGrid.astro';
 
         <!-- Reason 4 -->
         <div class="card">
-          <div class="text-4xl mb-4">🏪</div>
+          <div class="mb-4">
+            <Icon name="fa6-solid:store" class="w-12 h-12" style="color: var(--color-hemp-green);" />
+          </div>
           <h3 class="text-2xl font-bold mb-3" style="color: var(--color-hemp-green);">
             Small Businesses
           </h3>

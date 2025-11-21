@@ -7,6 +7,7 @@
  */
 
 import LandingLayout from '../layouts/LandingLayout.astro';
+import Navigation from '../components/Navigation.astro';
 ---
 
 <LandingLayout
@@ -14,18 +15,38 @@ import LandingLayout from '../layouts/LandingLayout.astro';
   description="Find your representatives and take action to save the hemp industry. Send emails or make calls in 60 seconds."
   ogImage="/og-image.jpg"
 >
+  <Navigation />
+
   <!-- Hero Section -->
-  <section class="py-12 md:py-16" style="background-color: var(--color-soft-cream);">
+  <section id="hero-section" class="py-12 md:py-16" style="background-color: var(--color-soft-cream);">
     <div class="container mx-auto px-6 max-w-4xl text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--color-soil-dark);">
-        Contact Your Representatives
+      <h1 class="text-4xl md:text-5xl font-bold mb-6" style="color: var(--color-soil-dark);">
+        Take Action Now
       </h1>
-      <p class="text-xl text-neutral-600 mb-8">
-        Enter your zip code to find your representatives and take action
+      <p class="text-xl text-neutral-600 mb-6 max-w-content mx-auto">
+        Your voice matters. Contact your representatives to save the hemp industry.
       </p>
 
+      <!-- Quick Steps -->
+      <div class="flex justify-center items-center gap-3 md:gap-6 mb-12 text-sm md:text-base text-neutral-600">
+        <div class="flex items-center gap-2">
+          <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" style="background-color: var(--color-hemp-green);">1</span>
+          <span>Grab your message</span>
+        </div>
+        <span class="text-neutral-400">→</span>
+        <div class="flex items-center gap-2">
+          <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" style="background-color: var(--color-hemp-green);">2</span>
+          <span>Contact your reps</span>
+        </div>
+        <span class="text-neutral-400">→</span>
+        <div class="flex items-center gap-2">
+          <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" style="background-color: var(--color-hemp-green);">3</span>
+          <span>Repeat weekly</span>
+        </div>
+      </div>
+
       <!-- Zip Code Form -->
-      <div class="max-w-form mx-auto">
+      <div id="zip-form-container" class="max-w-form mx-auto mb-12">
         <form id="zip-form" class="flex flex-col sm:flex-row gap-4">
           <input
             type="text"
@@ -46,6 +67,57 @@ import LandingLayout from '../layouts/LandingLayout.astro';
             Find My Reps →
           </button>
         </form>
+      </div>
+
+      <!-- How to Take Action -->
+      <div id="how-to-section" class="text-left">
+        <div class="card bg-white" style="border: 2px solid var(--color-hemp-green);">
+          <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center" style="color: var(--color-hemp-green);">
+            How to Take Action
+          </h2>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold text-white" style="background-color: var(--color-hemp-green);">
+                1
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold mb-2" style="color: var(--color-soil-dark);">Enter Your Zip Code</h3>
+                <p class="text-neutral-600">We'll find your senators and representative instantly.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold text-white" style="background-color: var(--color-hemp-green);">
+                2
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold mb-2" style="color: var(--color-soil-dark);">Copy Your Personalized Message</h3>
+                <p class="text-neutral-600">Choose your role (consumer, farmer, or industry worker) and we'll generate a compelling message with your state's impact data.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold text-white" style="background-color: var(--color-hemp-green);">
+                3
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold mb-2" style="color: var(--color-soil-dark);">Contact Your Reps</h3>
+                <p class="text-neutral-600">Use the contact form or call their offices. Paste your message and send.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold text-white" style="background-color: var(--color-hemp-green);">
+                ⟳
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold mb-2" style="color: var(--color-hemp-green);">Do It Regularly</h3>
+                <p class="text-neutral-600"><strong>Contact them at least once a week.</strong> Regular pressure from constituents is what drives change. Each call and email adds to the count and shows growing concern.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -77,7 +149,85 @@ import LandingLayout from '../layouts/LandingLayout.astro';
     </div>
   </section>
 
-  <!-- State Impact Data -->
+  <!-- Message Template Section -->
+  <section id="message-template-section" class="py-16 bg-white hidden">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--color-soil-dark);">
+          Your Personalized Message
+        </h2>
+        <p class="text-lg text-neutral-600 mb-6">
+          Choose your role and we'll generate a message you can copy and paste
+        </p>
+      </div>
+
+      <!-- Role Selector -->
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+        <button
+          class="role-btn"
+          data-role="consumer"
+          style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: white; color: var(--color-hemp-green);"
+        >
+          I'm a Consumer
+        </button>
+        <button
+          class="role-btn"
+          data-role="farmer"
+          style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: white; color: var(--color-hemp-green);"
+        >
+          I'm a Farmer
+        </button>
+        <button
+          class="role-btn"
+          data-role="industry"
+          style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: white; color: var(--color-hemp-green);"
+        >
+          I Work in Hemp Industry
+        </button>
+      </div>
+
+      <!-- Message Display (hidden until role selected) -->
+      <div id="message-card" class="card hidden" style="background: white; border: 2px solid var(--color-hemp-green);">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold" style="color: var(--color-soil-dark);">Your Message:</h3>
+          <button
+            id="copy-message-btn"
+            class="px-4 py-2 rounded-lg font-semibold transition-all"
+            style="background-color: var(--color-hemp-green); color: white; border: none;"
+          >
+            📋 Copy Message
+          </button>
+        </div>
+        <div
+          id="message-content"
+          class="p-4 rounded-lg text-left whitespace-pre-line"
+          style="background-color: #f9fafb; border: 1px solid #e5e7eb; font-family: inherit; line-height: 1.6;"
+        ></div>
+        <div id="copy-success" class="hidden mt-4 text-center font-semibold" style="color: var(--color-hemp-green);">
+          ✓ Message copied to clipboard!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Representatives List -->
+  <section id="reps-section" class="py-16 hidden" style="background-color: var(--color-soft-cream);">
+    <div class="container mx-auto px-6 max-w-7xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--color-soil-dark);">
+          Contact Your Representatives
+        </h2>
+        <p class="text-lg text-neutral-600">
+          Click below to personalize your message, then contact your reps
+        </p>
+      </div>
+
+      <!-- Representatives will be inserted here -->
+      <div id="reps-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8"></div>
+    </div>
+  </section>
+
+  <!-- State Impact Data (Full-width Green Section) -->
   <section id="state-impact-section" class="py-12 bg-gradient-to-br from-[var(--color-hemp-green)] to-[var(--color-soil-dark)] hidden">
     <div class="container mx-auto px-6 max-w-4xl">
       <div class="text-center mb-8">
@@ -125,82 +275,9 @@ import LandingLayout from '../layouts/LandingLayout.astro';
     </div>
   </section>
 
-  <!-- Message Template Section -->
-  <section id="message-template-section" class="py-16 bg-gradient-to-br from-[var(--color-soft-cream)] to-white hidden">
-    <div class="container mx-auto px-6 max-w-4xl">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--color-soil-dark);">
-          Your Personalized Message
-        </h2>
-        <p class="text-lg text-neutral-600 mb-6">
-          Choose your role and we'll generate a message you can copy and paste
-        </p>
-      </div>
-
-      <!-- Role Selector -->
-      <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-        <button
-          class="role-btn active"
-          data-role="consumer"
-          style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: var(--color-hemp-green); color: white;"
-        >
-          I'm a Consumer
-        </button>
-        <button
-          class="role-btn"
-          data-role="farmer"
-          style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: white; color: var(--color-hemp-green);"
-        >
-          I'm a Farmer
-        </button>
-        <button
-          class="role-btn"
-          data-role="industry"
-          style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: white; color: var(--color-hemp-green);"
-        >
-          I Work in Hemp Industry
-        </button>
-      </div>
-
-      <!-- Message Display -->
-      <div class="card" style="background: white; border: 2px solid var(--color-hemp-green);">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-xl font-bold" style="color: var(--color-soil-dark);">Your Message:</h3>
-          <button
-            id="copy-message-btn"
-            class="px-4 py-2 rounded-lg font-semibold transition-all"
-            style="background-color: var(--color-hemp-green); color: white; border: none;"
-          >
-            📋 Copy Message
-          </button>
-        </div>
-        <div
-          id="message-content"
-          class="p-4 rounded-lg text-left whitespace-pre-line"
-          style="background-color: #f9fafb; border: 1px solid #e5e7eb; font-family: inherit; line-height: 1.6;"
-        ></div>
-        <div id="copy-success" class="hidden mt-4 text-center font-semibold" style="color: var(--color-hemp-green);">
-          ✓ Message copied to clipboard!
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Representatives List -->
-  <section id="reps-section" class="py-16 bg-white hidden">
-    <div class="container mx-auto px-6 max-w-5xl">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--color-soil-dark);">
-          Your Representatives
-        </h2>
-        <p class="text-lg text-neutral-600">
-          Use the message above when contacting them
-        </p>
-      </div>
-
-      <!-- Representatives will be inserted here -->
-      <div id="reps-container" class="space-y-8"></div>
-
+  <!-- Social Sharing Section (Back in reps section) -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 max-w-7xl">
       <!-- Social Sharing Section -->
       <div class="mt-16 text-center">
         <div class="card" style="background: white; border: 2px solid var(--color-hemp-green);">
@@ -220,6 +297,16 @@ import LandingLayout from '../layouts/LandingLayout.astro';
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </button>
+            <button
+              id="share-bluesky"
+              class="share-icon-btn"
+              aria-label="Share on Bluesky"
+              title="Share on Bluesky"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/>
               </svg>
             </button>
             <button
@@ -300,45 +387,33 @@ import LandingLayout from '../layouts/LandingLayout.astro';
   <!-- Representative Card Template -->
   <template id="rep-card-template">
     <div class="card rep-card">
-      <div class="flex flex-col md:flex-row gap-6">
-        <!-- Photo -->
-        <div class="flex-shrink-0">
-          <img
-            class="rep-photo w-32 h-32 rounded-full object-cover mx-auto md:mx-0"
-            alt=""
-          />
+      <!-- Name and Title -->
+      <div class="mb-4">
+        <h3 class="text-2xl font-bold mb-2 rep-name" style="color: var(--color-soil-dark);"></h3>
+        <div class="flex flex-wrap gap-3 items-center text-neutral-600">
+          <span class="rep-role font-semibold"></span>
+          <span class="text-neutral-400">•</span>
+          <span class="rep-party"></span>
         </div>
+      </div>
 
-        <!-- Info -->
-        <div class="flex-1">
-          <div class="mb-4">
-            <h3 class="text-2xl md:text-3xl font-bold mb-2 rep-name" style="color: var(--color-soil-dark);"></h3>
-            <div class="flex flex-wrap gap-3 items-center text-neutral-600">
-              <span class="rep-role font-semibold"></span>
-              <span class="text-neutral-400">•</span>
-              <span class="rep-party"></span>
-            </div>
-          </div>
-
-          <!-- Contact Info -->
-          <div class="mb-6 space-y-2">
-            <div class="rep-phone flex items-center gap-2 text-neutral-700">
-              <span class="text-xl">📞</span>
-              <a href="" class="phone-link hover:text-[var(--color-hemp-green)] transition-colors"></a>
-            </div>
-            <div class="rep-office text-neutral-600"></div>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4">
-            <button class="btn-email btn-primary flex-1">
-              Contact Form
-            </button>
-            <button class="btn-call flex-1 px-6 py-3 rounded-lg font-semibold transition-all hover:transform hover:-translate-y-0.5 hover:shadow-lg border-2" style="border-color: var(--color-hemp-green); color: var(--color-hemp-green); background-color: transparent;">
-              Call Now
-            </button>
-          </div>
+      <!-- Contact Info -->
+      <div class="mb-6 space-y-2">
+        <div class="rep-phone flex items-center gap-2 text-neutral-700">
+          <span class="text-xl">📞</span>
+          <a href="" class="phone-link hover:text-[var(--color-hemp-green)] transition-colors"></a>
         </div>
+        <div class="rep-office text-neutral-600"></div>
+      </div>
+
+      <!-- Action Buttons (Stacked) -->
+      <div class="flex flex-col gap-3">
+        <button class="btn-email btn-primary w-full">
+          Contact Form
+        </button>
+        <button class="btn-call w-full px-6 py-3 rounded-lg font-semibold transition-all hover:transform hover:-translate-y-0.5 hover:shadow-lg border-2" style="border-color: var(--color-hemp-green); color: var(--color-hemp-green); background-color: transparent;">
+          Call Now
+        </button>
       </div>
     </div>
   </template>
@@ -391,6 +466,10 @@ import LandingLayout from '../layouts/LandingLayout.astro';
      * Fetch representatives directly from Google Civic API (client-side)
      */
     async function fetchRepresentatives(zip) {
+      // Hide the zip form and instructions
+      const zipFormContainer = document.getElementById('zip-form-container');
+      const howToSection = document.getElementById('how-to-section');
+
       // Show loading state
       loadingState?.classList.remove('hidden');
       errorState?.classList.add('hidden');
@@ -438,16 +517,16 @@ import LandingLayout from '../layouts/LandingLayout.astro';
         // Initialize message template
         initializeMessageTemplate();
 
-        // Hide loading, show results
+        // Hide loading and zip form/instructions, show results
         loadingState?.classList.add('hidden');
+        zipFormContainer?.classList.add('hidden');
+        howToSection?.classList.add('hidden');
+
         if (stateData) {
           stateImpactSection?.classList.remove('hidden');
         }
         messageTemplateSection?.classList.remove('hidden');
         repsSection?.classList.remove('hidden');
-
-        // Scroll to state impact section
-        stateImpactSection?.scrollIntoView({ behavior: 'smooth' });
 
       } catch (error) {
         console.error('Error fetching representatives:', error);
@@ -636,17 +715,22 @@ import LandingLayout from '../layouts/LandingLayout.astro';
     function initializeMessageTemplate() {
       const roleButtons = document.querySelectorAll('.role-btn');
       const messageContent = document.getElementById('message-content');
+      const messageCard = document.getElementById('message-card');
       const copyBtn = document.getElementById('copy-message-btn');
       const copySuccess = document.getElementById('copy-success');
 
-      let currentRole = 'consumer';
+      let currentRole = null;
 
-      // Generate initial message
-      updateMessage(currentRole);
+      // Don't generate initial message - wait for user to select a role
 
       // Role button handlers
       roleButtons.forEach(btn => {
         btn.addEventListener('click', () => {
+          // Show message card on first click
+          if (messageCard && messageCard.classList.contains('hidden')) {
+            messageCard.classList.remove('hidden');
+          }
+
           // Update active state
           roleButtons.forEach(b => {
             b.classList.remove('active');
@@ -799,6 +883,7 @@ Thank you for your consideration.`;
      */
     document.addEventListener('DOMContentLoaded', () => {
       const shareTwitter = document.getElementById('share-twitter');
+      const shareBluesky = document.getElementById('share-bluesky');
       const shareFacebook = document.getElementById('share-facebook');
       const shareLinkedIn = document.getElementById('share-linkedin');
       const copyLink = document.getElementById('copy-link');
@@ -811,6 +896,13 @@ Thank you for your consideration.`;
         shareTwitter.addEventListener('click', () => {
           const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(siteUrl)}`;
           window.open(twitterUrl, '_blank', 'width=550,height=420');
+        });
+      }
+
+      if (shareBluesky) {
+        shareBluesky.addEventListener('click', () => {
+          const blueskyUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(shareText + ' ' + siteUrl)}`;
+          window.open(blueskyUrl, '_blank', 'width=550,height=420');
         });
       }
 

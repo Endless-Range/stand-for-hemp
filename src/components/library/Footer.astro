@@ -26,6 +26,7 @@ export interface Props {
     icon: string;
   }>;
   backgroundColor?: string;
+  endlessRangeUrl?: string;
 }
 
 const {
@@ -34,6 +35,7 @@ const {
   columns,
   socialLinks,
   backgroundColor = 'bg-neutral-900',
+  endlessRangeUrl,
 } = Astro.props;
 
 const currentYear = new Date().getFullYear();
@@ -91,19 +93,15 @@ const currentYear = new Date().getFullYear();
 
     <!-- Bottom Bar -->
     <div class="pt-8 border-t border-[#4a6741]/20">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <p class="text-[#4a6741]/70 text-sm mb-4 md:mb-0">
+      <div class="flex flex-col items-center text-center space-y-2">
+        <p class="text-[#4a6741]/70 text-sm">
           &copy; {currentYear} {companyName}. All rights reserved.
         </p>
-
-        <div class="flex space-x-6">
-          <a href="/privacy/" class="text-[#4a6741]/70 hover:text-[#4a6741] text-sm transition-colors">
-            Privacy Policy
-          </a>
-          <a href="/terms/" class="text-[#4a6741]/70 hover:text-[#4a6741] text-sm transition-colors">
-            Terms of Service
-          </a>
-        </div>
+        {endlessRangeUrl && (
+          <p class="text-[#4a6741]/70 text-sm">
+            An <a href={endlessRangeUrl} target="_blank" rel="noopener noreferrer" class="text-[#ca8a04] hover:text-[#4a6741] font-semibold transition-colors">Endless Range</a> project
+          </p>
+        )}
       </div>
     </div>
   </div>

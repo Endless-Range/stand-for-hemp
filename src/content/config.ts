@@ -2,6 +2,7 @@
  * Content Collections Configuration
  *
  * Define the schema for blog posts using Astro's content collections.
+ * Simplified for Stand for Hemp - no categories or author images.
  */
 
 import { defineCollection, z } from 'astro:content';
@@ -11,13 +12,14 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    featuredImage: z.string(),
-    author: z.string(),
-    authorImage: z.string().optional(),
+    featuredImage: z.string().optional(),
+    author: z.string().optional(),
     date: z.coerce.date(),
-    category: z.string(),
-    readingTime: z.number().optional(),
+    readingTime: z.number().optional(), // in minutes
     draft: z.boolean().default(false),
+    // Legacy fields from template - kept as optional for backward compatibility
+    category: z.string().optional(),
+    authorImage: z.string().optional(),
   }),
 });
 
