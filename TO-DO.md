@@ -85,10 +85,9 @@
 - [ ] Design infographics
 
 ### Success Criteria
-- [ ] State map is interactive
-- [ ] All 50 states have data
+- [x] State map is interactive
+- [x] All 50 states have data
 - [ ] Graphics are shareable
-- [ ] Media kit is complete
 
 ---
 
