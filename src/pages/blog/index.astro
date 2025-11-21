@@ -68,7 +68,7 @@ const blogPosts = allBlogPosts
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
             <a
-              href={`/blog/${post.slug}`}
+              href={`/blog/${post.slug}/`}
               class="card bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 block"
             >
               {post.featuredImage && (
@@ -82,21 +82,15 @@ const blogPosts = allBlogPosts
                 <h2 class="text-2xl font-bold mb-3" style="color: var(--color-soil-dark);">
                   {post.title}
                 </h2>
-                <p class="text-neutral-600 mb-4 line-clamp-3">
+                <p class="text-lg text-neutral-600 mb-4 line-clamp-3">
                   {post.excerpt}
                 </p>
-                <div class="flex items-center gap-3 text-sm text-neutral-500">
+                <div class="flex items-center gap-3 text-base text-neutral-500">
                   <span>{post.date}</span>
                   {post.readingTime && (
                     <>
                       <span>•</span>
                       <span>{post.readingTime} min read</span>
-                    </>
-                  )}
-                  {post.author && (
-                    <>
-                      <span>•</span>
-                      <span>By {post.author}</span>
                     </>
                   )}
                 </div>
@@ -109,7 +103,7 @@ const blogPosts = allBlogPosts
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20 md:py-32 text-center bg-gradient-to-br from-[var(--color-sky-blue)] to-[var(--color-hemp-green)]">
+  <section class="py-20 md:py-32 text-center" style="background-color: var(--color-sky-blue);">
     <div class="container mx-auto px-6 max-w-4xl">
       <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
         Ready to Take Action?

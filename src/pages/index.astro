@@ -391,5 +391,26 @@ import { Icon } from 'astro-icon/components';
           animateCounter(BASELINE);
         });
     }
+
+    // Track petition link clicks
+    const petitionLink = document.querySelector('a[href*="c.org"]');
+    if (petitionLink) {
+      petitionLink.addEventListener('click', () => {
+        if (window.plausible) {
+          window.plausible('Click Petition Link', { props: { location: 'homepage' } });
+        }
+      });
+    }
+
+    // Track CTA form submissions
+    const ctaForms = document.querySelectorAll('form[action="/take-action/"]');
+    ctaForms.forEach((form, index) => {
+      form.addEventListener('submit', (e) => {
+        const location = index === 0 ? 'hero' : 'bottom-cta';
+        if (window.plausible) {
+          window.plausible('Start Action Flow', { props: { location } });
+        }
+      });
+    });
   </script>
 </LandingLayout>

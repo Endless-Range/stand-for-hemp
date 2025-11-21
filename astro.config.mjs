@@ -17,6 +17,13 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   image: {
+    // Use compile service for Cloudflare - optimizes at build time with sharp
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: false,
+      }
+    },
     // Enable remote image optimization
     remotePatterns: [
       {

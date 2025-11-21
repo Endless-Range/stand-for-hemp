@@ -324,16 +324,6 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
               </svg>
             </button>
             <button
-              id="share-linkedin"
-              class="share-icon-btn"
-              aria-label="Share on LinkedIn"
-              title="Share on LinkedIn"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </button>
-            <button
               id="copy-link"
               class="share-icon-btn"
               aria-label="Copy link"
@@ -488,6 +478,14 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
       e.preventDefault();
       const zip = zipInput.value.trim();
       if (zip && zip.match(/^\d{5}$/)) {
+        // Track zip code submission in Plausible
+        if (window.plausible) {
+          window.plausible('Find Representatives', {
+            props: {
+              zipCode: zip
+            }
+          });
+        }
         fetchRepresentatives(zip);
         // Update URL without reload
         const newUrl = new URL(window.location.href);
@@ -759,6 +757,16 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
         const emailBtn = card.querySelector('.btn-email');
         if (emailBtn) {
           emailBtn.addEventListener('click', () => {
+            // Track email click in Plausible
+            if (window.plausible) {
+              window.plausible('Email Representative', {
+                props: {
+                  representative: rep.name,
+                  state: currentStateName || 'Unknown',
+                  position: rep.position
+                }
+              });
+            }
             handleEmailAction(rep);
             // Show inline confirmation after a short delay (user has time to interact with contact form)
             setTimeout(() => {
@@ -775,6 +783,16 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
           if (rep.phone) {
             callBtn.addEventListener('click', () => {
               console.log('Calling:', rep.name, 'at', rep.phone);
+              // Track call click in Plausible
+              if (window.plausible) {
+                window.plausible('Call Representative', {
+                  props: {
+                    representative: rep.name,
+                    state: currentStateName || 'Unknown',
+                    position: rep.position
+                  }
+                });
+              }
               window.location.href = `tel:${rep.phone}`;
               // Show inline confirmation after a short delay (user has time to make the call)
               setTimeout(() => {
@@ -993,7 +1011,6 @@ Thank you for your consideration.`;
       const shareTwitter = document.getElementById('share-twitter');
       const shareBluesky = document.getElementById('share-bluesky');
       const shareFacebook = document.getElementById('share-facebook');
-      const shareLinkedIn = document.getElementById('share-linkedin');
       const copyLink = document.getElementById('copy-link');
       const linkCopied = document.getElementById('link-copied');
 
@@ -1002,6 +1019,10 @@ Thank you for your consideration.`;
 
       if (shareTwitter) {
         shareTwitter.addEventListener('click', () => {
+          // Track social share in Plausible
+          if (window.plausible) {
+            window.plausible('Social Share', { props: { platform: 'Twitter' } });
+          }
           const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(siteUrl)}`;
           window.open(twitterUrl, '_blank', 'width=550,height=420');
         });
@@ -1009,6 +1030,10 @@ Thank you for your consideration.`;
 
       if (shareBluesky) {
         shareBluesky.addEventListener('click', () => {
+          // Track social share in Plausible
+          if (window.plausible) {
+            window.plausible('Social Share', { props: { platform: 'Bluesky' } });
+          }
           const blueskyUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(shareText + ' ' + siteUrl)}`;
           window.open(blueskyUrl, '_blank', 'width=550,height=420');
         });
@@ -1016,21 +1041,22 @@ Thank you for your consideration.`;
 
       if (shareFacebook) {
         shareFacebook.addEventListener('click', () => {
+          // Track social share in Plausible
+          if (window.plausible) {
+            window.plausible('Social Share', { props: { platform: 'Facebook' } });
+          }
           const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(siteUrl)}&quote=${encodeURIComponent(shareText)}`;
           window.open(facebookUrl, '_blank', 'width=550,height=420');
-        });
-      }
-
-      if (shareLinkedIn) {
-        shareLinkedIn.addEventListener('click', () => {
-          const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(siteUrl)}`;
-          window.open(linkedInUrl, '_blank', 'width=550,height=420');
         });
       }
 
       if (copyLink && linkCopied) {
         copyLink.addEventListener('click', async () => {
           try {
+            // Track link copy in Plausible
+            if (window.plausible) {
+              window.plausible('Copy Share Link');
+            }
             await navigator.clipboard.writeText(siteUrl);
             linkCopied.classList.remove('hidden');
             setTimeout(() => {
