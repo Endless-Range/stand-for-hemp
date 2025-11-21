@@ -75,6 +75,7 @@ export const GET: APIRoute = async ({ params }) => {
         contactForm: senator.contactForm,
         website: senator.website,
         photoUrl: null, // We don't have photos in the database
+        social: senator.social,
       });
     }
 
@@ -89,6 +90,7 @@ export const GET: APIRoute = async ({ params }) => {
         contactForm: representative.contactForm,
         website: representative.website,
         photoUrl: null,
+        social: representative.social,
       });
     }
 

@@ -9,6 +9,7 @@ import https from 'https';
 import yaml from 'yaml';
 
 const LEGISLATORS_URL = 'https://raw.githubusercontent.com/unitedstates/congress-legislators/main/legislators-current.yaml';
+const SOCIAL_MEDIA_URL = 'https://raw.githubusercontent.com/unitedstates/congress-legislators/main/legislators-social-media.yaml';
 const ZIP_DISTRICTS_URL = 'https://raw.githubusercontent.com/OpenSourceActivismTech/us-zipcodes-congress/master/zccd.csv';
 const OUTPUT_FILE = './src/data/legislators.json';
 const ZIP_MAP_FILE = './src/data/zip-districts.json';
@@ -28,8 +29,20 @@ async function buildDatabase() {
   console.log('Downloading legislators data...');
   const yamlData = await downloadFile(LEGISLATORS_URL);
 
+  console.log('Downloading social media data...');
+  const socialYamlData = await downloadFile(SOCIAL_MEDIA_URL);
+
   console.log('Parsing YAML...');
   const legislators = yaml.parse(yamlData);
+  const socialMedia = yaml.parse(socialYamlData);
+
+  // Create a map of bioguideId to social media
+  const socialMap = {};
+  for (const entry of socialMedia) {
+    if (entry.id?.bioguide) {
+      socialMap[entry.id.bioguide] = entry.social;
+    }
+  }
 
   console.log(`Processing ${legislators.length} legislators...`);
 
@@ -48,6 +61,9 @@ async function buildDatabase() {
       continue;
     }
 
+    // Get social media for this legislator
+    const social = socialMap[legislator.id.bioguide] || {};
+
     const record = {
       name: legislator.name.official_full || `${legislator.name.first} ${legislator.name.last}`,
       firstName: legislator.name.first,
@@ -58,7 +74,13 @@ async function buildDatabase() {
       contactForm: currentTerm.contact_form || currentTerm.url || null,
       website: currentTerm.url || null,
       office: currentTerm.office || currentTerm.address || null,
-      bioguideId: legislator.id.bioguide
+      bioguideId: legislator.id.bioguide,
+      social: {
+        twitter: social.twitter || null,
+        facebook: social.facebook || null,
+        youtube: social.youtube || null,
+        instagram: social.instagram || null
+      }
     };
 
     if (currentTerm.type === 'sen') {

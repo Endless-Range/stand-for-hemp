@@ -61,9 +61,10 @@
 - [x] Interactive map shows impact across all 50 states
 - [x] Social sharing works with pre-filled messages
 - [x] Petition link prominently displayed
+- [x] Email template system
+
 
 ### Skipped/Postponed
-- [ ] Email template system (not needed - using rep contact forms)
 - [ ] AI personalization (may add later if needed)
 
 ---
@@ -72,12 +73,10 @@
 **Goal**: State dashboard + media kit + shareable content
 
 ### Core Development
-- [ ] Build interactive state map with impact data
+- [x] Build interactive state map with impact data
 - [ ] Create state-specific pages with local stats
-- [ ] Build About/Story page explaining the mission
+- [x] Build About/Story page explaining the mission
 - [ ] Design shareable graphics for social media
-- [ ] Build press/media page with real-time stats
-- [ ] Create downloadable media kit
 - [ ] Add graphics generator for milestones
 
 ### Content Creation
