@@ -14,15 +14,15 @@
 - [x] Register domain StandforHemp.com
 - [x] Set up hosting (Cloudflare)
 - [x] Set up public GitHub repository
-- [ ] Create navigation menu (Home, Take Action, About, Contact)
+- [x] Create navigation menu (Home, Take Action, About, Contact)
 - [x] Build homepage with:
   - [x] Hero section with urgent messaging
   - [x] Zip code input form
   - [ ] Live action counter (POSTPONED - moved to Day 3+)
   - [x] Link to petition
-- [ ] Create contact page with form
+- [x] Create contact page with form
 - [ ] Set up database for action counter (POSTPONED)
-- [ ] Create placeholder pages for call functionality
+- [x] Create placeholder pages for call functionality
 - [x] Test mobile responsiveness
 - [x] Deploy to production
 
@@ -314,7 +314,12 @@
 
 **LET'S GO.** 🌱
 
+## Blog Posts
+[ ] what is the federal hemp ban / what is the hemp ban
+[ ] who added the hemp ban
+[ ] what does the hemp ban mean for dispensaries
+
 ---
 
-*Last Updated: Day 0 (November 19, 2025)*  
-*Next Update: End of Day 1*
+*Last Updated: Day 0 (November 21, 2025)*  
+*Next Update: End of Day 3*

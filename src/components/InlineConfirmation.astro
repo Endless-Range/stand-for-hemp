@@ -1,0 +1,140 @@
+---
+/**
+ * Inline Confirmation Component
+ * Shows after user clicks email/call button
+ * Asks if they contacted their legislators and tracks the response
+ */
+---
+
+<div id="inline-confirmation" class="hidden mb-8">
+  <div style="max-width: 900px; margin: 0 auto; background: rgba(74, 103, 65, 0.5); backdrop-filter: blur(10px); border-radius: 12px; padding: 24px 32px; display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap;">
+    <p style="color: white; font-size: 18px; font-weight: 600; margin: 0; flex-shrink: 0;">
+      Did you contact your legislators?
+    </p>
+    <div style="display: flex; gap: 16px; flex-shrink: 0;">
+      <button
+        id="confirm-yes-inline"
+        style="background: white; color: #4a6741; padding: 12px 40px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; font-size: 16px; transition: all 0.2s;"
+        onmouseover="this.style.opacity='0.9'; this.style.transform='scale(1.05)'"
+        onmouseout="this.style.opacity='1'; this.style.transform='scale(1)'"
+      >
+        Yes
+      </button>
+      <button
+        id="confirm-not-yet-inline"
+        style="background: white; color: #4a6741; padding: 12px 40px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; font-size: 16px; transition: all 0.2s;"
+        onmouseover="this.style.opacity='0.9'; this.style.transform='scale(1.05)'"
+        onmouseout="this.style.opacity='1'; this.style.transform='scale(1)'"
+      >
+        No
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Inline confirmation functionality
+  const inlineConfirmation = document.getElementById('inline-confirmation');
+  const confirmYesInline = document.getElementById('confirm-yes-inline');
+  const confirmNotYetInline = document.getElementById('confirm-not-yet-inline');
+
+  let currentActionType: 'email' | 'call' | null = null;
+  let currentZipCode: string | null = null;
+  let currentState: string | null = null;
+
+  // Show inline confirmation function
+  function showInlineConfirmation(actionType: 'email' | 'call', zipCode?: string, state?: string) {
+    currentActionType = actionType;
+    currentZipCode = zipCode || null;
+    currentState = state || null;
+
+    // Show the confirmation
+    inlineConfirmation?.classList.remove('hidden');
+
+    // Scroll to it smoothly
+    inlineConfirmation?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Hide inline confirmation
+  function hideInlineConfirmation() {
+    inlineConfirmation?.classList.add('hidden');
+    currentActionType = null;
+    currentZipCode = null;
+    currentState = null;
+  }
+
+  // Track action
+  async function trackAction() {
+    if (!currentActionType) return;
+
+    try {
+      const response = await fetch('/api/track-action', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action_type: currentActionType,
+          zip_code: currentZipCode,
+          state: currentState,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        console.log('Action tracked successfully:', data);
+        // Dispatch custom event so other components can update (like the counter)
+        window.dispatchEvent(new CustomEvent('action-tracked', { detail: data.stats }));
+        return true;
+      }
+    } catch (error) {
+      console.error('Error tracking action:', error);
+    }
+    return false;
+  }
+
+  // Event listeners
+  confirmYesInline?.addEventListener('click', async () => {
+    const success = await trackAction();
+    hideInlineConfirmation();
+    if (success) {
+      showSuccessToast();
+    }
+  });
+
+  confirmNotYetInline?.addEventListener('click', () => {
+    hideInlineConfirmation();
+  });
+
+  // Success toast
+  function showSuccessToast() {
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50';
+    toast.style.animation = 'slideInRight 0.3s ease-out';
+    toast.innerHTML = '🎉 Thank you! Your action has been counted.';
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+  // Expose function globally so other components can call it
+  (window as any).showInlineConfirmation = showInlineConfirmation;
+</script>
+
+<style>
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>

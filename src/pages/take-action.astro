@@ -8,6 +8,7 @@
 
 import LandingLayout from '../layouts/LandingLayout.astro';
 import Navigation from '../components/Navigation.astro';
+import InlineConfirmation from '../components/InlineConfirmation.astro';
 ---
 
 <LandingLayout
@@ -217,10 +218,13 @@ import Navigation from '../components/Navigation.astro';
         <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--color-soil-dark);">
           Contact Your Representatives
         </h2>
-        <p class="text-lg text-neutral-600">
+        <p class="text-lg text-neutral-600 mb-8">
           Click below to personalize your message, then contact your reps
         </p>
       </div>
+
+      <!-- Inline Confirmation (hidden until action taken) -->
+      <InlineConfirmation />
 
       <!-- Representatives will be inserted here -->
       <div id="reps-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8"></div>
@@ -756,6 +760,12 @@ import Navigation from '../components/Navigation.astro';
         if (emailBtn) {
           emailBtn.addEventListener('click', () => {
             handleEmailAction(rep);
+            // Show inline confirmation after a short delay (user has time to interact with contact form)
+            setTimeout(() => {
+              if (window.showInlineConfirmation) {
+                window.showInlineConfirmation('email', zipInput.value, currentStateName);
+              }
+            }, 2000); // 2 second delay
           });
         }
 
@@ -766,6 +776,12 @@ import Navigation from '../components/Navigation.astro';
             callBtn.addEventListener('click', () => {
               console.log('Calling:', rep.name, 'at', rep.phone);
               window.location.href = `tel:${rep.phone}`;
+              // Show inline confirmation after a short delay (user has time to make the call)
+              setTimeout(() => {
+                if (window.showInlineConfirmation) {
+                  window.showInlineConfirmation('call', zipInput.value, currentStateName);
+                }
+              }, 2000); // 2 second delay
             });
           } else {
             callBtn.disabled = true;
