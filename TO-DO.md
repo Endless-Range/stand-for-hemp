@@ -104,6 +104,10 @@
 ## 🤖 DAY 5 (Sunday) - BLUESKY & BLOG AUTOMATION
 **Goal**: Automate content creation and publishing
 
+### Website Data Enhancement
+- [ ] Highlight which representatives are up for reelection
+- [ ] Highlight which representatives are actually trying to get rid of the ban
+
 ### BlueSky Automation
 - [ ] Set up BlueSky API access
 - [ ] Create content generation system
@@ -119,6 +123,7 @@
 - [ ] Test and deploy
 
 ### Success Criteria
+- [ ] Representative cards show reelection status and ban stance
 - [ ] BlueSky posts going out automatically
 - [ ] Blog posts publishing weekly without intervention
 - [ ] Quality content that drives engagement
@@ -259,5 +264,5 @@
 
 ---
 
-*Last Updated: Day 3 (November 21, 2025)*  
-*Next Update: End of Day 4*
+*Last Updated: Day 4 (November 22, 2025)*  
+*Next Update: End of Day 5*
