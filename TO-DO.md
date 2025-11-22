@@ -107,6 +107,7 @@
 ### Website Data Enhancement
 - [ ] Highlight which representatives are up for reelection
 - [ ] Highlight which representatives are actually trying to get rid of the ban
+- [ ] Add BlueSky social to footer
 
 ### BlueSky Automation
 - [ ] Set up BlueSky API access
