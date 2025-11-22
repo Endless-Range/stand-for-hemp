@@ -3,7 +3,7 @@ title: "What is the Federal Hemp Ban?"
 description: "The 2018 Farm Bill legalized hemp. Now, a provision Mitch McConnell snuck into a November 2025 spending bill threatens to ban hemp-derived cannabinoid products nationwide starting November 12, 2026. Here's what you need to know."
 featuredImage: "/images/blog/federal-hemp-ban.jpg"
 author: "Stand for Hemp Team"
-date: 2025-01-19
+date: 2025-11-19
 readingTime: 7
 draft: false
 ---
