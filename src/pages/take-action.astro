@@ -183,17 +183,17 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
           data-role="industry"
           style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: white; color: var(--color-hemp-green);"
         >
-          I Work in Hemp Industry
+          I Work in the Industry
         </button>
       </div>
 
       <!-- Message Display (hidden until role selected) -->
       <div id="message-card" class="card hidden" style="background: white; border: 2px solid var(--color-hemp-green);">
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4">
           <h3 class="text-xl font-bold" style="color: var(--color-soil-dark);">Your Message:</h3>
           <button
             id="copy-message-btn"
-            class="px-4 py-2 rounded-lg font-semibold transition-all"
+            class="px-4 py-2 rounded-lg font-semibold transition-all w-full sm:w-auto"
             style="background-color: var(--color-hemp-green); color: white; border: none;"
           >
             📋 Copy Message
@@ -877,6 +877,12 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
       if (copyBtn && messageContent) {
         copyBtn.addEventListener('click', async () => {
           const message = messageContent.textContent;
+
+          // Update button text immediately for feedback
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = '✓ Copied!';
+          copyBtn.style.backgroundColor = 'var(--color-soil-dark)';
+
           try {
             await navigator.clipboard.writeText(message);
             if (copySuccess) {
@@ -887,20 +893,43 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
             }
           } catch (err) {
             console.error('Failed to copy:', err);
-            // Fallback for older browsers
+            // Fallback for older browsers and iOS
             const textArea = document.createElement('textarea');
             textArea.value = message;
+            textArea.style.position = 'fixed';
+            textArea.style.top = '0';
+            textArea.style.left = '0';
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            textArea.style.padding = '0';
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            textArea.style.background = 'transparent';
             document.body.appendChild(textArea);
+            textArea.focus();
             textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            if (copySuccess) {
-              copySuccess.classList.remove('hidden');
-              setTimeout(() => {
-                copySuccess.classList.add('hidden');
-              }, 3000);
+
+            try {
+              document.execCommand('copy');
+              if (copySuccess) {
+                copySuccess.classList.remove('hidden');
+                setTimeout(() => {
+                  copySuccess.classList.add('hidden');
+                }, 3000);
+              }
+            } catch (execErr) {
+              console.error('Fallback copy failed:', execErr);
             }
+
+            document.body.removeChild(textArea);
           }
+
+          // Reset button after delay
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+            copyBtn.style.backgroundColor = 'var(--color-hemp-green)';
+          }, 2000);
         });
       }
 
