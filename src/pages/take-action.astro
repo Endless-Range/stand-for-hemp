@@ -415,6 +415,11 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
   <!-- Representative Card Template -->
   <template id="rep-card-template">
     <div class="card rep-card">
+      <!-- Reelection Badge (Top of Card) -->
+      <div class="rep-reelection-badge mb-4 px-4 py-2 rounded-md font-semibold text-sm text-center" style="background-color: #fef3c7; color: #92400e; display: none;">
+        Up for reelection in 2026
+      </div>
+
       <!-- Name and Title -->
       <div class="mb-4">
         <h3 class="text-2xl font-bold mb-2 rep-name" style="color: var(--color-soil-dark);"></h3>
@@ -680,6 +685,19 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
         if (nameEl) nameEl.textContent = rep.name;
         if (roleEl) roleEl.textContent = rep.role;
         if (partyEl) partyEl.textContent = rep.party;
+
+        // Show reelection badge if term ends in 2027 (up for reelection in 2026)
+        const reelectionBadge = card.querySelector('.rep-reelection-badge');
+        const cardElement = card.querySelector('.rep-card');
+        if (reelectionBadge && rep.termEnd && rep.termEnd.startsWith('2027')) {
+          reelectionBadge.style.display = 'block';
+          // Highlight the entire card with amber/yellow border
+          if (cardElement) {
+            cardElement.style.borderColor = '#f59e0b';
+            cardElement.style.borderWidth = '3px';
+            cardElement.style.boxShadow = '0 4px 12px rgba(245, 158, 11, 0.2)';
+          }
+        }
 
         // Phone
         const phoneDiv = card.querySelector('.rep-phone');

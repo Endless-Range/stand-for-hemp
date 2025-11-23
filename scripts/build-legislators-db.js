@@ -75,6 +75,8 @@ async function buildDatabase() {
       website: currentTerm.url || null,
       office: currentTerm.office || currentTerm.address || null,
       bioguideId: legislator.id.bioguide,
+      termEnd: currentTerm.end,
+      senateClass: currentTerm.class || null,
       social: {
         twitter: social.twitter || null,
         facebook: social.facebook || null,
