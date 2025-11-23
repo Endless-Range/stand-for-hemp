@@ -35,7 +35,7 @@
 ### Success Criteria
 - [x] Website is live
 - [x] Zip code form works
-- [ ] Counter displays
+- [x] Counter displays
 - [x] Loads fast on mobile
 
 ---

@@ -1077,6 +1077,7 @@ Thank you for representing the interests of ${stateName} and considering this im
 
       const siteUrl = 'https://standforhemp.com';
       const shareText = 'I just contacted my representatives to save the hemp industry. 300,000 jobs and $28B at risk. Join me at StandforHemp.com #SaveHemp';
+      const blueskyShareText = 'I just contacted my representatives to save the hemp industry. 300,000 jobs and $28B at risk. Join me @standforhemp.bsky.social #SaveHemp';
 
       if (shareTwitter) {
         shareTwitter.addEventListener('click', () => {
@@ -1095,7 +1096,7 @@ Thank you for representing the interests of ${stateName} and considering this im
           if (window.plausible) {
             window.plausible('Social Share', { props: { platform: 'Bluesky' } });
           }
-          const blueskyUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(shareText + ' ' + siteUrl)}`;
+          const blueskyUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(blueskyShareText + ' ' + siteUrl)}`;
           window.open(blueskyUrl, '_blank', 'width=550,height=420');
         });
       }
