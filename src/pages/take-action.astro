@@ -19,17 +19,17 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
   <Navigation />
 
   <!-- Hero Section -->
-  <section id="hero-section" class="py-12 md:py-16" style="background-color: var(--color-soft-cream);">
+  <section id="hero-section" class="py-8 md:py-12" style="background-color: var(--color-soft-cream);">
     <div class="container mx-auto px-6 max-w-4xl text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6" style="color: var(--color-soil-dark);">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4" style="color: var(--color-soil-dark);">
         Take Action Now
       </h1>
-      <p class="text-xl text-neutral-600 mb-6 max-w-content mx-auto">
+      <p class="text-xl text-neutral-600 mb-4 max-w-content mx-auto">
         Your voice matters. Contact your representatives to save the hemp industry.
       </p>
 
       <!-- Quick Steps -->
-      <div class="flex justify-center items-center gap-3 md:gap-6 mb-12 text-sm md:text-base text-neutral-600">
+      <div class="flex justify-center items-center gap-3 md:gap-6 mb-8 text-sm md:text-base text-neutral-600">
         <div class="flex items-center gap-2">
           <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" style="background-color: var(--color-hemp-green);">1</span>
           <span>Grab your message</span>
@@ -47,7 +47,7 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
       </div>
 
       <!-- Zip Code Form -->
-      <div id="zip-form-container" class="max-w-form mx-auto mb-12">
+      <div id="zip-form-container" class="max-w-form mx-auto mb-8">
         <form id="zip-form" class="flex flex-col sm:flex-row gap-4">
           <input
             type="text"
@@ -184,6 +184,13 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
           style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: white; color: var(--color-hemp-green);"
         >
           I Work in the Industry
+        </button>
+        <button
+          class="role-btn"
+          data-role="advocate"
+          style="padding: 1rem 2rem; border-radius: 8px; font-weight: 600; transition: all 0.2s; border: 2px solid var(--color-hemp-green); background-color: white; color: var(--color-hemp-green);"
+        >
+          I'm an Advocate
         </button>
       </div>
 
@@ -1027,6 +1034,31 @@ Please vote to amend the Farm Bill to support regulation rather than prohibition
 My job, my colleagues' jobs, and thousands of jobs across ${stateName} depend on your action.
 
 Thank you for your consideration.`;
+        } else if (role === 'advocate') {
+          message = `Dear Representative,
+
+I am writing to you as a constituent in ${stateName} to express my strong concern about the Farm Bill's ban on hemp-derived products.
+
+IN ${stateName.toUpperCase()}, THIS BAN WILL IMPACT:
+• ${jobs} jobs at risk
+• $${revenue} in annual revenue threatened
+• ${businesses} hemp businesses facing closure
+
+While I am neither a consumer, farmer, nor employed in the hemp industry, I am deeply concerned about this ban's impact on our economy and individual freedom. This prohibition destroys a legal industry that provides jobs, supports farmers, and serves millions of Americans who benefit from hemp products.
+
+This ban:
+• Takes effect November 12, 2026 (bill signed November 12, 2025)
+• Eliminates hemp products through "total THC" restrictions and 0.4mg per package limits
+• Overrides state laws that have successfully regulated hemp
+• Destroys legal businesses and jobs without addressing real safety concerns
+
+I believe in smart regulation, not outright prohibition. The federal government should allow states to regulate hemp products as they see fit, or work with industry to create sensible federal standards that protect consumers while preserving this legal market.
+
+This ban represents federal overreach that eliminates state sovereignty, destroys legal businesses, and takes away products that help many people. It's prohibition masquerading as regulation.
+
+I urge you to support amendments to the Farm Bill that allow for regulation rather than elimination of the hemp industry. Please respect states' rights and the livelihoods of hundreds of thousands of Americans.
+
+Thank you for representing the interests of ${stateName} and considering this important issue.`;
         }
 
         messageContent.textContent = message;
