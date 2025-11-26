@@ -78,6 +78,7 @@ export const GET: APIRoute = async ({ params }) => {
         social: senator.social,
         termEnd: senator.termEnd,
         senateClass: senator.senateClass,
+        fightingTheBan: senator.fightingTheBan || false,
       });
     }
 
@@ -94,6 +95,7 @@ export const GET: APIRoute = async ({ params }) => {
         photoUrl: null,
         social: representative.social,
         termEnd: representative.termEnd,
+        fightingTheBan: representative.fightingTheBan || false,
       });
     }
 

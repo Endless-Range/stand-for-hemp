@@ -105,7 +105,7 @@
 **Goal**: Automate content creation and publishing
 
 ### Website Data Enhancement
-- [ ] Highlight which representatives are up for reelection
+- [x] Highlight which representatives are up for reelection
 - [ ] Highlight which representatives are actually trying to get rid of the ban
 - [x] Add BlueSky social to footer
 

@@ -415,7 +415,12 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
   <!-- Representative Card Template -->
   <template id="rep-card-template">
     <div class="card rep-card">
-      <!-- Reelection Badge (Top of Card) -->
+      <!-- Fighting the Ban Badge (Top of Card) -->
+      <div class="rep-champion-badge mb-4 px-4 py-2 rounded-md font-semibold text-sm text-center" style="background-color: #d1fae5; color: #065f46; display: none;">
+        Fighting the Ban
+      </div>
+
+      <!-- Reelection Badge -->
       <div class="rep-reelection-badge mb-4 px-4 py-2 rounded-md font-semibold text-sm text-center" style="background-color: #fef3c7; color: #92400e; display: none;">
         Up for reelection in 2026
       </div>
@@ -686,13 +691,28 @@ import InlineConfirmation from '../components/InlineConfirmation.astro';
         if (roleEl) roleEl.textContent = rep.role;
         if (partyEl) partyEl.textContent = rep.party;
 
+        // Show champion badge if rep is fighting the ban
+        const championBadge = card.querySelector('.rep-champion-badge');
+        const cardElement = card.querySelector('.rep-card');
+        const isChampion = rep.fightingTheBan === true;
+        const isUpForReelection = rep.termEnd && rep.termEnd.startsWith('2027');
+
+        if (championBadge && isChampion) {
+          championBadge.style.display = 'block';
+          // Highlight the entire card with emerald/green border (takes precedence)
+          if (cardElement) {
+            cardElement.style.borderColor = '#10b981';
+            cardElement.style.borderWidth = '3px';
+            cardElement.style.boxShadow = '0 4px 12px rgba(16, 185, 129, 0.2)';
+          }
+        }
+
         // Show reelection badge if term ends in 2027 (up for reelection in 2026)
         const reelectionBadge = card.querySelector('.rep-reelection-badge');
-        const cardElement = card.querySelector('.rep-card');
-        if (reelectionBadge && rep.termEnd && rep.termEnd.startsWith('2027')) {
+        if (reelectionBadge && isUpForReelection) {
           reelectionBadge.style.display = 'block';
-          // Highlight the entire card with amber/yellow border
-          if (cardElement) {
+          // Only apply amber border styling if NOT a champion (champion takes precedence)
+          if (cardElement && !isChampion) {
             cardElement.style.borderColor = '#f59e0b';
             cardElement.style.borderWidth = '3px';
             cardElement.style.boxShadow = '0 4px 12px rgba(245, 158, 11, 0.2)';

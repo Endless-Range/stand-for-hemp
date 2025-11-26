@@ -1,0 +1,30 @@
+{
+  "lastUpdated": "2025-11-26",
+  "description": "Representatives actively fighting the hemp ban",
+  "champions": {
+    "P000603": { "name": "Rand Paul", "state": "KY", "chamber": "senate" },
+    "C001098": { "name": "Ted Cruz", "state": "TX", "chamber": "senate" },
+    "M001176": { "name": "Jeff Merkley", "state": "OR", "chamber": "senate" },
+    "W000779": { "name": "Ron Wyden", "state": "OR", "chamber": "senate" },
+    "K000367": { "name": "Amy Klobuchar", "state": "MN", "chamber": "senate" },
+    "S001203": { "name": "Tina Smith", "state": "MN", "chamber": "senate" },
+    "M000194": { "name": "Nancy Mace", "state": "SC", "chamber": "house" },
+    "M001184": { "name": "Thomas Massie", "state": "KY", "chamber": "house" },
+    "C001108": { "name": "James Comer", "state": "KY", "chamber": "house" },
+    "O000173": { "name": "Ilhan Omar", "state": "MN", "chamber": "house" },
+    "C001120": { "name": "Dan Crenshaw", "state": "TX", "chamber": "house" },
+    "G000568": { "name": "Morgan Griffith", "state": "VA", "chamber": "house" },
+    "B001282": { "name": "Andy Barr", "state": "KY", "chamber": "house" },
+    "L000582": { "name": "Ted Lieu", "state": "CA", "chamber": "house" },
+    "M001220": { "name": "Morgan McGarvey", "state": "KY", "chamber": "house" },
+    "S001214": { "name": "Greg Steube", "state": "FL", "chamber": "house" },
+    "B001307": { "name": "James Baird", "state": "IN", "chamber": "house" },
+    "M001236": { "name": "Tim Moore", "state": "NC", "chamber": "house" },
+    "C001103": { "name": "Earl 'Buddy' Carter", "state": "GA", "chamber": "house" },
+    "V000135": { "name": "Derrick Van Orden", "state": "WI", "chamber": "house" },
+    "F000471": { "name": "Scott Fitzgerald", "state": "WI", "chamber": "house" },
+    "M001177": { "name": "Tom McClintock", "state": "CA", "chamber": "house" },
+    "G000576": { "name": "Glenn Grothman", "state": "WI", "chamber": "house" },
+    "F000478": { "name": "Russell Fry", "state": "SC", "chamber": "house" }
+  }
+}

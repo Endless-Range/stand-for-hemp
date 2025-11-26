@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-11-23T09:09:40.046Z",
+  "lastUpdated": "2025-11-26T11:20:55.075Z",
   "senators": {
     "WA": [
       {
@@ -62,7 +62,8 @@
           "facebook": null,
           "youtube": "senatorklobuchar",
           "instagram": null
-        }
+        },
+        "fightingTheBan": true
       },
       {
         "name": "Tina Smith",
@@ -82,7 +83,8 @@
           "facebook": "USSenTinaSmith",
           "youtube": null,
           "instagram": "senatortinasmith"
-        }
+        },
+        "fightingTheBan": true
       }
     ],
     "VT": [
@@ -334,7 +336,8 @@
           "facebook": "SenatorTedCruz",
           "youtube": "sentedcruz",
           "instagram": "sentedcruz"
-        }
+        },
+        "fightingTheBan": true
       }
     ],
     "IL": [
@@ -460,7 +463,8 @@
           "facebook": "SenatorRandPaul",
           "youtube": "SenatorRandPaul",
           "instagram": "senatorrandpaul"
-        }
+        },
+        "fightingTheBan": true
       }
     ],
     "OR": [
@@ -482,7 +486,8 @@
           "facebook": "jeffmerkley",
           "youtube": "SenatorJeffMerkley",
           "instagram": "senjeffmerkley"
-        }
+        },
+        "fightingTheBan": true
       },
       {
         "name": "Ron Wyden",
@@ -502,7 +507,8 @@
           "facebook": "senatorronwyden",
           "youtube": "senronwyden",
           "instagram": "ronwyden"
-        }
+        },
+        "fightingTheBan": true
       }
     ],
     "ID": [
@@ -2721,7 +2727,8 @@
         "facebook": "RepMorganGriffith",
         "youtube": "RepMorganGriffith",
         "instagram": "hmorgangriffith"
-      }
+      },
+      "fightingTheBan": true
     },
     "KY-2": {
       "name": "Brett Guthrie",
@@ -3101,7 +3108,8 @@
         "facebook": "81125319109",
         "youtube": "McClintockCA04",
         "instagram": "repmcclintock"
-      }
+      },
+      "fightingTheBan": true
     },
     "MN-4": {
       "name": "Betty McCollum",
@@ -3981,7 +3989,8 @@
         "facebook": "RepThomasMassie",
         "youtube": "repthomasmassie",
         "instagram": "repthomasmassie"
-      }
+      },
+      "fightingTheBan": true
     },
     "IL-11": {
       "name": "Bill Foster",
@@ -4241,7 +4250,8 @@
         "facebook": "RepAndyBarr",
         "youtube": "RepAndyBarr",
         "instagram": "RepAndyBarr"
-      }
+      },
+      "fightingTheBan": true
     },
     "MO-2": {
       "name": "Ann Wagner",
@@ -4701,7 +4711,8 @@
         "facebook": "RepTedLieu",
         "youtube": null,
         "instagram": "RepTedLieu"
-      }
+      },
+      "fightingTheBan": true
     },
     "CA-35": {
       "name": "Norma J. Torres",
@@ -4741,7 +4752,8 @@
         "facebook": "congressmanbuddycarter",
         "youtube": null,
         "instagram": "repbuddycarter"
-      }
+      },
+      "fightingTheBan": true
     },
     "GA-11": {
       "name": "Barry Loudermilk",
@@ -5061,7 +5073,8 @@
         "facebook": "RepGrothman",
         "youtube": null,
         "instagram": "repglenngrothman"
-      }
+      },
+      "fightingTheBan": true
     },
     "AS-0": {
       "name": "Aumua Amata Coleman Radewagen",
@@ -5161,7 +5174,8 @@
         "facebook": "congressmancomer",
         "youtube": null,
         "instagram": "congressmancomer"
-      }
+      },
+      "fightingTheBan": true
     },
     "PA-3": {
       "name": "Dwight Evans",
@@ -6021,7 +6035,8 @@
         "facebook": "RepGregSteube",
         "youtube": "@RepGregSteube",
         "instagram": "repgregsteube"
-      }
+      },
+      "fightingTheBan": true
     },
     "GA-6": {
       "name": "Lucy McBath",
@@ -6141,7 +6156,8 @@
         "facebook": "RepJimBaird",
         "youtube": "UCAe6fGhotC9J9tR_QONYzFA",
         "instagram": null
-      }
+      },
+      "fightingTheBan": true
     },
     "KS-3": {
       "name": "Sharice Davids",
@@ -6281,7 +6297,8 @@
         "facebook": null,
         "youtube": null,
         "instagram": null
-      }
+      },
+      "fightingTheBan": true
     },
     "MN-8": {
       "name": "Pete Stauber",
@@ -6621,7 +6638,8 @@
         "facebook": "RepDanCrenshaw",
         "youtube": "UC2XDiCjAHtJqnSEzrHAY5IQ",
         "instagram": "dancrenshawtx"
-      }
+      },
+      "fightingTheBan": true
     },
     "TX-5": {
       "name": "Lance Gooden",
@@ -7561,7 +7579,8 @@
         "facebook": "RepNancyMace",
         "youtube": null,
         "instagram": "repnancymace"
-      }
+      },
+      "fightingTheBan": true
     },
     "TN-1": {
       "name": "Diana Harshbarger",
@@ -7781,7 +7800,8 @@
         "facebook": "CongressmanScottFitzgerald",
         "youtube": null,
         "instagram": null
-      }
+      },
+      "fightingTheBan": true
     },
     "NY-24": {
       "name": "Claudia Tenney",
@@ -8541,7 +8561,8 @@
         "facebook": "RepMcGarvey",
         "youtube": null,
         "instagram": "repmcgarvey"
-      }
+      },
+      "fightingTheBan": true
     },
     "MD-4": {
       "name": "Glenn Ivey",
@@ -9081,7 +9102,8 @@
         "facebook": "reprussellfry",
         "youtube": "@reprussellfry",
         "instagram": "reprussellfry"
-      }
+      },
+      "fightingTheBan": true
     },
     "TN-5": {
       "name": "Andrew Ogles",
@@ -9321,7 +9343,8 @@
         "facebook": "RepVanOrden",
         "youtube": null,
         "instagram": "RepVanOrden"
-      }
+      },
+      "fightingTheBan": true
     },
     "WY-0": {
       "name": "Harriet M. Hageman",
@@ -10301,7 +10324,8 @@
         "facebook": "CongressmanTimMoore",
         "youtube": null,
         "instagram": "reptimmoore"
-      }
+      },
+      "fightingTheBan": true
     },
     "ND-0": {
       "name": "Julie Fedorchak",

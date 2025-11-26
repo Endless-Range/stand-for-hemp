@@ -13,6 +13,7 @@ const SOCIAL_MEDIA_URL = 'https://raw.githubusercontent.com/unitedstates/congres
 const ZIP_DISTRICTS_URL = 'https://raw.githubusercontent.com/OpenSourceActivismTech/us-zipcodes-congress/master/zccd.csv';
 const OUTPUT_FILE = './src/data/legislators.json';
 const ZIP_MAP_FILE = './src/data/zip-districts.json';
+const HEMP_CHAMPIONS_FILE = './src/data/hemp-champions.json';
 
 async function downloadFile(url) {
   return new Promise((resolve, reject) => {
@@ -97,6 +98,33 @@ async function buildDatabase() {
       processedData.representatives[key] = record;
     }
   }
+
+  // Merge hemp champion data
+  console.log('\nMerging hemp champion data...');
+  const championsData = JSON.parse(fs.readFileSync(HEMP_CHAMPIONS_FILE, 'utf8'));
+  const championIds = new Set(Object.keys(championsData.champions));
+  let championsFound = 0;
+
+  // Mark champions in senators
+  for (const state of Object.keys(processedData.senators)) {
+    for (const senator of processedData.senators[state]) {
+      if (championIds.has(senator.bioguideId)) {
+        senator.fightingTheBan = true;
+        championsFound++;
+      }
+    }
+  }
+
+  // Mark champions in representatives
+  for (const key of Object.keys(processedData.representatives)) {
+    const rep = processedData.representatives[key];
+    if (championIds.has(rep.bioguideId)) {
+      rep.fightingTheBan = true;
+      championsFound++;
+    }
+  }
+
+  console.log(`✓ Marked ${championsFound} legislators as hemp champions`);
 
   // Create data directory if it doesn't exist
   const dir = './src/data';
